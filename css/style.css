@@ -17,6 +17,11 @@ body {
 	font-size: 120px;
 }
 
-.name {
+.selectabale {
 	cursor: pointer;
+	transition: background-color 200ms linear;
+}
+
+.selectabale:hover {
+	background-color: rgba(255,255,255,.4);
 }
