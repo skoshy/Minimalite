@@ -1,0 +1,15 @@
+body {
+	background-color: black;
+	color: white;
+}
+
+.centered_box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+
+	font-size: 100px;
+}
