@@ -10,6 +10,13 @@ body {
 	height: 100%;
 	width: 100%;
 	position: absolute;
+	text-align: center;
+}
 
+.time {
 	font-size: 120px;
+}
+
+.name {
+	cursor: pointer;
 }
