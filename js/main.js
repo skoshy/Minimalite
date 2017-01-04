@@ -18,7 +18,7 @@ $( document ).ready(function() {
 	$('.name').click(function() {
 		changeName();
 	});
-	$('.centered_box').fadeIn();
+	$('.centered_box, .wallpaper').fadeIn();
 	/*
 		location stuff to use eventually eventually
 		navigator.geolocation.getCurrentPosition(function(position) {
