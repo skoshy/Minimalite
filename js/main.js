@@ -12,7 +12,7 @@ chrome.storage.sync.get('name', function (result) {
 $( document ).ready(function() {
 	var interval = setInterval(function() {
 		var momentNow = moment();
-		$('.time').html(momentNow.format('hh:mm'));
+		$('.time').html(momentNow.format('h:mm'));
 	}, 100);
 	$('.name').html(name);
 	$('.name').click(function() {
