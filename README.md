@@ -1,0 +1,1 @@
+A minimal new tab page for Chrome
