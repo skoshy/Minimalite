@@ -29,7 +29,11 @@ $( document ).ready(function() {
 
 function changeName() {
 	name = window.prompt("What's your name?", "User");
-	if (name != null) {
+	if (
+		name != null &&
+		$.trim(name) != ''
+	) {
+		name = $.trim(name);
 		chrome.storage.sync.set({'name': name}, function() {});
 		$('.name').html(name);
 	}
