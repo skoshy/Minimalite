@@ -5,10 +5,12 @@ var settings = {
 		"name": {
 			"allowNewlines": false,
 			"default": "User",
-			"maxCharacters": 30
+			"maxCharacters": 30,
+			"class": "name"
 		},
 		"notes": {
-			"default": "Type notes here"
+			"default": "Type notes here",
+			"class": "notes"
 		},
 		"weather_location": {
 			"default": "New York",
@@ -41,6 +43,7 @@ chrome.storage.sync.get(Object.keys(settings.contentTypes), function (result) {
 			prefs[key] = result[key];
 		} else {
 			saveSetting(settings.contentTypes[key].default, key, true);
+			updatePrefsDisplay(key);
 		}
 	}
 });
@@ -84,8 +87,8 @@ $( document ).ready(function() {
 	}, 100);
 
 	// initialize displays
-	$('.name').html(prepTextForDisplay(prefs.name));
-	$('.notes').html(prepTextForDisplay(prefs.notes));
+	updatePrefsDisplay("name");
+	updatePrefsDisplay("notes");
 	updateWeatherDisplay();
 
 	// fade in
@@ -192,6 +195,10 @@ function prepTextForDisplay(text) {
 
 function prepTextForSave(text) {
 	return $.trim(text).replace(/<\s*br.*?>/g, "\n");
+}
+
+function updatePrefsDisplay(key) {
+	$('.'+settings.contentTypes[key].class).html(prepTextForDisplay(prefs[key]));
 }
 
 function removeLinebreaksForDisplay(text) {
