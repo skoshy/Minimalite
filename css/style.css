@@ -36,6 +36,16 @@ body {
 	font-size: 45px;
 }
 
+.notes {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	max-width: 200px;
+	max-height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
 .selectabale {
 	cursor: pointer;
 	transition: background-color 200ms linear;
@@ -43,4 +53,23 @@ body {
 
 .selectabale:hover {
 	background-color: rgba(255,255,255,.4);
+}
+
+::-webkit-scrollbar-track
+{
+	background-color: rgba(255,255,255,.2);
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	border: 1px solid rgba(0,0,0,.2);
+	background-color: rgba(255,255,255,.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: rgba(0,0,0,.4);
+	border: 1px solid rgba(80,80,80,.7);
+	border-radius: 10px;
 }
