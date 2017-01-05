@@ -59,7 +59,7 @@ chrome.storage.local.get(Object.keys(weather), function (data) {
 
 	if (
 		!dataExists || // if we've never gotten the weather before
-		weather.timeUpdated < moment().format("x")-360000 // or if the weather data is outdated
+		weather.timeUpdated < moment().format("x")-3600000 // or if the weather data is outdated
 	) {
 		console.log("Getting weather data...");
 		getAndUpdateWeather(weather.location);
