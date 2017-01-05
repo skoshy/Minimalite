@@ -33,7 +33,7 @@ $( document ).ready(function() {
 
 		var hour = momentNow.hours();
 		var newWelcomeText;
-		if (hour <= 3 || hour >= 6) {
+		if (hour <= 3 || hour >= 18) {
 			newWelcomeText = 'Good evening, ';
 		} else if (hour >= 4 && hour <= 11) {
 			newWelcomeText = 'Good morning, ';
