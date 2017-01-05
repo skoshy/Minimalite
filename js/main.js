@@ -9,8 +9,27 @@ var settings = {
 		},
 		"notes": {
 			"default": "Type notes here"
+		},
+		"weather_location": {
+			"default": "New York",
+			"allowNewlines": false,
+			"maxCharacters": 30
 		}
 	}
+};
+
+var weather = {
+	timeUpdated: "",
+	location: "10016",
+
+	city: "",
+	currently: "",
+	image: "",
+	low: "",
+	high: "",
+	temp: "",
+	todayCode: "",
+	wind: {}
 };
 
 // Load in all data into prefs object
@@ -21,8 +40,29 @@ chrome.storage.sync.get(Object.keys(settings.contentTypes), function (result) {
 		if (result.hasOwnProperty(key)) {
 			prefs[key] = result[key];
 		} else {
-			saveSetting(settings.contentTypes[key].default, key);
+			saveSetting(settings.contentTypes[key].default, key, true);
 		}
+	}
+});
+
+// Load in weather data from local store
+chrome.storage.local.get(Object.keys(weather), function (data) {
+	let keys = Object.keys(weather);
+	let dataExists = false;
+	for (i in keys) {
+		key = keys[i];
+		if (data.hasOwnProperty(key)) {
+			dataExists = true;
+			weather[key] = data[key];
+		}
+	}
+
+	if (
+		!dataExists || // if we've never gotten the weather before
+		weather.timeUpdated < moment().format("x")-360000 // or if the weather data is outdated
+	) {
+		console.log("Getting weather data...");
+		getAndUpdateWeather(weather.location);
 	}
 });
 
@@ -46,6 +86,7 @@ $( document ).ready(function() {
 	// initialize displays
 	$('.name').html(prepTextForDisplay(prefs.name));
 	$('.notes').html(prepTextForDisplay(prefs.notes));
+	updateWeatherDisplay();
 
 	// fade in
 	$('.centered_box, .wallpaper').fadeIn();
@@ -115,7 +156,11 @@ $( document ).ready(function() {
 		newDisplayText = prepTextForDisplay(htmlDecode(newSaveText));
 		el.html(newDisplayText);
 
-		saveSetting(newSaveText, contentType);
+		if (contentType == "weather_location") {
+			getAndUpdateWeather(newSaveText);
+		} else {
+			saveSetting(newSaveText, contentType, true);
+		}
 	});
 
 	/*
@@ -126,11 +171,18 @@ $( document ).ready(function() {
 	*/
 });
 
-function saveSetting(newText, key) {
+function saveSetting(newText, key, isSync) {
 	prefs[key] = newText;
 	newSetting = {};
 	newSetting[key] = newText;
-	chrome.storage.sync.set(newSetting, function() {});
+
+	if (isSync) {
+		storageType = "sync";
+	} else {
+		storageType = "local";
+	}
+
+	chrome.storage[storageType].set(newSetting, function() {});
 	return newText;
 }
 
@@ -154,4 +206,46 @@ function htmlEncode(value){
 
 function htmlDecode(value) {
   return $('<div/>').html(value).text();
+}
+
+function getAndUpdateWeather(location) {
+	$.simpleWeather({
+		location: location,
+		unit: 'f',
+		woeid: '',
+		success: function(weather) {
+			console.log("Weather received! Updating...");
+			updateWeather(weather);
+			updateWeatherDisplay();
+		},
+		error: function(error) {
+			console.log(error);
+			$('.weather_location_container').effect("highlight", {color: "ff9595"}, 2000);
+		}
+	});
+}
+
+function updateWeather(weatherObj) {
+	let keys = Object.keys(weatherObj);
+	for (i in keys) {
+		key = keys[i];
+
+		if (weatherObj.hasOwnProperty(key)) {
+			weather[key] = weatherObj[key];
+			saveSetting(weather[key], key, false);
+		}
+	}
+
+	// finally, update time updated
+	weather.timeUpdated = moment().format("x");
+	saveSetting(weather.timeUpdated, "timeUpdated", false);
+}
+
+function updateWeatherDisplay() {
+	if (weather.city != "") {
+		$('.weather .weather_high').html(weather.high+"&deg;");
+		$('.weather .weather_low').html(weather.low+"&deg;");
+		$('.weather .weather_icon').attr("src", "/icons/weather/"+weather.todayCode+".svg");
+		$('.weather .weather_location').html(weather.city);
+	}
 }

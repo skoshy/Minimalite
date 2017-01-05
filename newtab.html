@@ -3,7 +3,11 @@
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js" crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
 
 	<script src="js/main.js" type="text/javascript"></script>
 
@@ -30,9 +34,17 @@
 			</div>
 		</div>
 	</div>
+	<div class="widget_outer top_right">
+		<div class="weather">
+			<img class="weather_icon" src=""/>
+			<div class="weather_high"></div>
+			<div class="weather_low"></div>
+			<div class="weather_location_container"><span contentEditable data-content-type="weather_location" class="weather_location selectabale"></span></div>
+		</div>
+	</div>
 	<div class="widget_outer bottom_right">
 		<div contentEditable data-content-type="notes" class="notes">
-			test
+			
 		</div>
 	</div>
 </body>

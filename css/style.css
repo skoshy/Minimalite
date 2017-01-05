@@ -43,17 +43,48 @@ body {
 	overflow-x: hidden;
 }
 
+.weather .weather_icon {
+	max-width: 50px;
+	max-height: 50px;
+	filter: invert(1);
+}
+
+.weather .weather_icon,
+.weather .weather_high,
+.weather .weather_low {
+	display: inline-block;
+}
+
+.weather .weather_high {
+	font-size: 24px;
+}
+
+.weather .weather_low {
+	font-size: 16px;
+}
+
+.weather .weather_location_container {
+	margin-top: -14px;
+}
+
 .widget_outer {
 	position: absolute;
 	transition: opacity 200ms linear;
+	opacity: .3;
 }
 
 .widget_outer.bottom_right {
 	padding: 150px 20px 20px 150px;
 	bottom: 0;
 	right: 0;
+	text-align: right;
+}
 
-	opacity: .3;
+.widget_outer.top_right {
+	padding: 20px 20px 150px 150px;
+	top: 0;
+	right: 0;
+	text-align: right;
 }
 
 .widget_outer:hover {
