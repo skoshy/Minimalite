@@ -41,7 +41,7 @@ $( document ).ready(function() {
 function changeName() {
 	name = window.prompt("What's your name?", "User");
 	if (
-		name != null &&
+		name != "null" &&
 		$.trim(name) != ''
 	) {
 		name = $.trim(name);
