@@ -1,19 +1,27 @@
 // Get settings
 var prefs = {};
-
-chrome.storage.sync.get('name', function (result) {
-	if (typeof result.name == "undefined") {
-		saveSetting("User", "name");
-	} else {
-		prefs.name = result.name;
+var settings = {
+	"contentTypes": {
+		"name": {
+			"allowNewlines": false,
+			"default": "User"
+		},
+		"notes": {
+			"default": "Type notes here"
+		}
 	}
-});
+};
 
-chrome.storage.sync.get('notes', function (result) {
-	if (typeof result.notes == "undefined" || result.notes == "") {
-		saveSetting("Type notes here", "notes");
-	} else {
-		prefs.notes = result.notes;
+// Load in all data into prefs object
+chrome.storage.sync.get(Object.keys(settings.contentTypes), function (result) {
+	let keys = Object.keys(settings.contentTypes);
+	for (i in keys) {
+		key = keys[i];
+		if (result.hasOwnProperty(key)) {
+			prefs[key] = result[key];
+		} else {
+			saveSetting(settings.contentTypes[key].default, key);
+		}
 	}
 });
 
@@ -33,38 +41,55 @@ $( document ).ready(function() {
 		}
 		$('.welcome_text').html(newWelcomeText);
 	}, 100);
-	$('.name').html(prefs.name);
-	$('.notes').html(prefs.notes);
+
+	// initialize displays
+	$('.name').html(prepTextForDisplay(prefs.name));
+	$('.notes').html(prepTextForDisplay(prefs.notes));
+
+	// fade in
 	$('.centered_box, .wallpaper').fadeIn();
 
-	/* Set up saving your name by editing the name box */
-	$('[contentEditable]').on('input', function(e) {
-		console.log(e);
+	$('[contentEditable]').on('keydown', function(e) {
 		el = $(e.target);
 		contentType = el.attr('data-content-type');
 
-		// only keep text, trim it, then shorten it to a max of 30 characters
-		newText = el.text().replace(/(?:\r\n|\r|\n)/g, '<br />');
-		if (contentType == "name") {
-			if (newText == "") {
-				newText = "User";
-			}
-			newText = newText.substring(0, 30);
-		} else if (contentType == "notes") {
-			if (newText == "") {
-				newText = "Type notes here";
-			}
+		// don't allow new lines if not allowed for the content type
+		if (settings.contentTypes[contentType].allowNewlines === false && e.keyCode === 13) {
+			return false;
 		}
-		el.html(newText);
+	});
+	$('[contentEditable]').on('drop paste', function(e) {
+		// cancel paste
+		e.originalEvent.preventDefault();
+
+		// get text representation of clipboard
+		var oldText;
+		if (e.type == "paste") {
+			oldText = e.originalEvent.clipboardData.getData("text/plain");
+		} else if (e.type == "drop") {
+			oldText = e.originalEvent.dataTransfer.getData("Text");
+		}
+		
+		var text = prepTextForDisplay(oldText);
+
+		// insert text manually
+		document.execCommand("insertHTML", false, text);
 	});
 	$('[contentEditable]').blur(function(e) {
 		el = $(e.target);
 		contentType = el.attr('data-content-type');
 
-		newText = $.trim(el.text());
-		el.html(newText);
+		// parse the text. convert <br/> to newlines
+		newSaveText = prepTextForSave(el.html());
 
-		saveSetting(newText, contentType);
+		if (newSaveText == "") {
+			newSaveText = settings.contentTypes[contentType].default;
+		}
+
+		newDisplayText = prepTextForDisplay(htmlDecode(newSaveText));
+		el.html(newDisplayText);
+
+		saveSetting(newSaveText, contentType);
 	});
 
 	/*
@@ -81,4 +106,22 @@ function saveSetting(newText, key) {
 	newSetting[key] = newText;
 	chrome.storage.sync.set(newSetting, function() {});
 	return newText;
+}
+
+function prepTextForDisplay(text) {
+	return htmlEncode(text).replace(/(?:\r\n|\r|\n)/g, '<br />');
+}
+
+function prepTextForSave(text) {
+	return $.trim(text).replace(/<\s*br.*?>/g, "\n");
+}
+
+function htmlEncode(value){
+  //create a in-memory div, set it's inner text(which jQuery automatically encodes)
+  //then grab the encoded contents back out.  The div never exists on the page.
+  return $('<div/>').text(value).html();
+}
+
+function htmlDecode(value) {
+  return $('<div/>').html(value).text();
 }
