@@ -3,7 +3,7 @@ var name;
 
 chrome.storage.sync.get('name', function (result) {
 	if (typeof result.name == "undefined") {
-		changeName();
+		saveName("User");
 	} else {
 		name = result.name;
 	}
@@ -26,10 +26,22 @@ $( document ).ready(function() {
 		$('.welcome_text').html(newWelcomeText);
 	}, 100);
 	$('.name').html(name);
-	$('.name').click(function() {
-		changeName();
-	});
 	$('.centered_box, .wallpaper').fadeIn();
+
+	/* Set up saving your name by editing the name box */
+	$('.name').on('input', function(e) {
+		// only keep text, trim it, then shorten it to a max of 30 characters
+		newName = $.trim($(e.target).text());
+		if (newName == "") {
+			newName = "User";
+		}
+		$(e.target).html(newName.substring(0, 30));
+	});
+	$('.name').blur(function(e) {
+		newName = $.trim($(e.target).text());
+		saveName(newName);
+	});
+
 	/*
 		location stuff to use eventually eventually
 		navigator.geolocation.getCurrentPosition(function(position) {
@@ -38,14 +50,8 @@ $( document ).ready(function() {
 	*/
 });
 
-function changeName() {
-	name = window.prompt("What's your name?", "User");
-	if (
-		name != "null" &&
-		$.trim(name) != ''
-	) {
-		name = $.trim(name);
-		chrome.storage.sync.set({'name': name}, function() {});
-		$('.name').html(name);
-	}
+function saveName(newName) {
+	name = newName;
+	chrome.storage.sync.set({'name': name}, function() {});
+	return name;
 }
