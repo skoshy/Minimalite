@@ -37,13 +37,27 @@ body {
 }
 
 .notes {
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
 	max-width: 200px;
 	max-height: 200px;
 	overflow-y: auto;
 	overflow-x: hidden;
+}
+
+.widget_outer {
+	position: absolute;
+	transition: opacity 200ms linear;
+}
+
+.widget_outer.bottom_right {
+	padding: 150px 20px 20px 150px;
+	bottom: 0;
+	right: 0;
+
+	opacity: .3;
+}
+
+.widget_outer:hover {
+	opacity: 1;
 }
 
 .selectabale {
