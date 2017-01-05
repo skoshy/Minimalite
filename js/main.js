@@ -13,6 +13,17 @@ $( document ).ready(function() {
 	var interval = setInterval(function() {
 		var momentNow = moment();
 		$('.time').html(momentNow.format('h:mm'));
+
+		var hour = momentNow.hours();
+		var newWelcomeText;
+		if (hour <= 3 || hour >= 6) {
+			newWelcomeText = 'Good evening, ';
+		} else if (hour >= 4 && hour <= 11) {
+			newWelcomeText = 'Good morning, ';
+		} else {
+			newWelcomeText = 'Good afternoon, ';
+		}
+		$('.welcome_text').html(newWelcomeText);
 	}, 100);
 	$('.name').html(name);
 	$('.name').click(function() {
