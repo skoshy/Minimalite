@@ -107,7 +107,8 @@ $( document ).ready(function() {
 		// parse the text. convert <br/> to newlines
 		newSaveText = prepTextForSave(el.html());
 
-		if (newSaveText == "") {
+		// if blank, change to default text
+		if (newSaveText == "" || el.text() == "") {
 			newSaveText = settings.contentTypes[contentType].default;
 		}
 
@@ -134,7 +135,7 @@ function saveSetting(newText, key) {
 }
 
 function prepTextForDisplay(text) {
-	return htmlEncode(text).replace(/(?:\r\n|\r|\n)/g, '<br />');
+	return htmlEncode(text).replace(/(?:\r\n|\r|\n)/g, '<br>');
 }
 
 function prepTextForSave(text) {
