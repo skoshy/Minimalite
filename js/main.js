@@ -4,7 +4,8 @@ var settings = {
 	"contentTypes": {
 		"name": {
 			"allowNewlines": false,
-			"default": "User"
+			"default": "User",
+			"maxCharacters": 30
 		},
 		"notes": {
 			"default": "Type notes here"
@@ -57,8 +58,22 @@ $( document ).ready(function() {
 		if (settings.contentTypes[contentType].allowNewlines === false && e.keyCode === 13) {
 			return false;
 		}
+
+		// don't allow typing more characters if reached max
+		if (
+			settings.contentTypes[contentType].maxCharacters <= el.text().length
+			&& e.key.length == 1 // this limits it to only keys that insert text
+			&& !(e.keyCode == 8 || e.keyCode == 46) // check to see if we're hitting backspace or delete
+			&& !(e.ctrlKey)
+			&& !(e.altKey)
+		) {
+			return false;
+		}
 	});
 	$('[contentEditable]').on('drop paste', function(e) {
+		el = $(e.target);
+		originalText = el.text();
+
 		// cancel paste
 		e.originalEvent.preventDefault();
 
@@ -71,6 +86,16 @@ $( document ).ready(function() {
 		}
 		
 		var text = prepTextForDisplay(oldText);
+
+		// don't allow new lines if not allowed for the content type
+		if (settings.contentTypes[contentType].allowNewlines === false) {
+			text = removeLinebreaksForDisplay(text);
+		}
+
+		// don't allow more characters if reached max
+		if (settings.contentTypes[contentType].maxCharacters <= originalText.length+text.length) {
+			return false;
+		}
 
 		// insert text manually
 		document.execCommand("insertHTML", false, text);
@@ -114,6 +139,10 @@ function prepTextForDisplay(text) {
 
 function prepTextForSave(text) {
 	return $.trim(text).replace(/<\s*br.*?>/g, "\n");
+}
+
+function removeLinebreaksForDisplay(text) {
+	return text.replace(/<\s*br.*?>/g, " ");
 }
 
 function htmlEncode(value){

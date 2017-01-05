@@ -69,6 +69,20 @@ body {
 	*/
 }
 
+[contentEditable]::-webkit-scrollbar-track,
+[contentEditable]::-webkit-scrollbar-thumb,
+[contentEditable]::-webkit-scrollbar
+{
+	visibility: hidden;
+}
+
+[contentEditable]:hover::-webkit-scrollbar-track,
+[contentEditable]:hover::-webkit-scrollbar-thumb,
+[contentEditable]:hover::-webkit-scrollbar
+{
+	visibility: visible;
+}
+
 .selectabale {
 	cursor: pointer;
 	transition: background-color 200ms linear;
@@ -80,7 +94,7 @@ body {
 
 ::-webkit-scrollbar-track
 {
-	background-color: rgba(255,255,255,.2);
+	background-color: rgba(100,100,100,.01);
 }
 
 ::-webkit-scrollbar
