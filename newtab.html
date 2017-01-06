@@ -19,7 +19,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
-	<div class="wallpaper" style="display: none;"></div>
+	<div class="wallpaper blurred" style="display: none;">
+		<img src=""/>
+	</div>
 	<div class="centered_box" style="display: none;">
 		<div class="inner">
 			<div class="time"></div>
@@ -40,7 +42,16 @@
 		</div>
 	</div>
 	<div class="widget_outer bottom_left">
-		<svg-icon><src href="/icons/sprite.svg#si-glyph-gear" /></svg-icon>
+		<div class="prefs_panel" style="display: none;">
+			<h1>Preferences</h1>
+			<div contentEditable data-content-type="custom_image" class="custom_image_field">
+
+			</div>
+			<div contentEditable data-content-type="name" class="name selectable">
+
+			</div>
+		</div>
+		<svg-icon class="prefs_button"><src href="/icons/sprite.svg#si-glyph-gear" /></svg-icon>
 	</div>
 	<div class="widget_outer bottom_right">
 		<div contentEditable data-content-type="notes" class="notes selectable">

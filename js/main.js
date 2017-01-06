@@ -16,13 +16,18 @@ var settings = {
 			"default": "New York",
 			"allowNewlines": false,
 			"maxCharacters": 30
+		},
+		"custom_image": {
+			"default": "https://source.unsplash.com/category/nature/1920x1080/daily",
+			"class": "custom_image_field",
+			"allowNewLines": false
 		}
 	}
 };
 
 var weather = {
 	timeUpdated: "",
-	location: "10016",
+	location: "New York", // default
 
 	city: "",
 	currently: "",
@@ -89,10 +94,21 @@ $( document ).ready(function() {
 	// initialize displays
 	updatePrefsDisplay("name");
 	updatePrefsDisplay("notes");
+	updatePrefsDisplay("custom_image");
 	updateWeatherDisplay();
 
 	// fade in
-	$('.centered_box, .wallpaper').fadeIn();
+	$('.centered_box').fadeIn();
+	$('.wallpaper img').on("load", function(e) {
+		el = $(e.target);
+		parent = el.parent();
+
+		parent.fadeIn();
+	});
+
+	$('.prefs_button').click(function() {
+		$('.prefs_panel').toggle();
+	});
 
 	$('[contentEditable]').on('keydown', function(e) {
 		el = $(e.target);
@@ -163,6 +179,7 @@ $( document ).ready(function() {
 			getAndUpdateWeather(newSaveText);
 		} else {
 			saveSetting(newSaveText, contentType, true);
+			updatePrefsDisplay(contentType);
 		}
 	});
 
@@ -199,6 +216,16 @@ function prepTextForSave(text) {
 
 function updatePrefsDisplay(key) {
 	$('.'+settings.contentTypes[key].class).html(prepTextForDisplay(prefs[key]));
+
+	if (key == "custom_image") {
+		if (prefs[key] == "") {
+			$('.wallpaper').css('background-image', "");
+			$('.wallpaper img').attr('src', "");
+		} else {
+			$('.wallpaper').css('background-image', "url("+prefs[key]+")");
+			$('.wallpaper img').attr('src', prefs[key]);
+		}
+	}
 }
 
 function removeLinebreaksForDisplay(text) {
