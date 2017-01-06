@@ -5,3 +5,5 @@ This is essentially a clone of Momentum Dash., which can be found here: https://
 I made this to add extra personalization and extra features.
 
 Weather icons by Climacons - http://adamwhitcroft.com/climacons/
+
+Other icons by Glyph - http://glyph.smarticons.co/
