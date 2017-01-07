@@ -8,7 +8,8 @@ body {
 
 h1 {
 	font-size: 20px;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
+	font-weight: bold;
 }
 
 .wallpaper {
@@ -71,9 +72,9 @@ h1 {
 }
 
 .weather .weather_icon {
-	max-width: 50px;
-	max-height: 50px;
-	filter: invert(1) drop-shadow( 0px 0px 2px rgba(0,0,0,.7) );
+	filter: drop-shadow( 0px 0px 2px rgba(0,0,0,.7) );
+	font-size: 30px;
+	padding-right: 10px;
 }
 
 .weather .weather_icon,
@@ -84,6 +85,7 @@ h1 {
 
 .weather .weather_high {
 	font-size: 24px;
+	padding-right: 5px;
 }
 
 .weather .weather_low {
@@ -91,23 +93,97 @@ h1 {
 }
 
 .weather .weather_location_container {
-	margin-top: -5px;
+	margin-top: 2px;
 }
 
 .prefs_panel {
 	background: rgba(0,0,0,.7);
-	border-radius: 10px;
-	width: 300px;
+	border-radius: 10px 10px 10px 0;
+	width: 360px;
 	height: 200px;
-	padding: 20px;
+	padding: 14px;
+	margin-bottom: 25px;
+	position: relative;
+}
+
+.prefs_panel_inner {
+	overflow-y: scroll;
+	height: 100%;
+}
+
+.prefs_panel .triangle {
+	position: absolute;
+	bottom: -15px;
+	left: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 15px 15px 0 15px;
+	border-color: rgba(0,0,0,.7) transparent transparent transparent;
+}
+
+.prefs_panel h1 {
+	float: left;
+}
+
+.prefs_panel a,
+.prefs_panel a:visited,
+.prefs_panel a:active,
+.prefs_panel a:hover {
+	color: #A3DEFE;
+}
+
+.prefs_panel .reset_wallpaper_container {
+	float: right;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.prefs_panel button {
+	background: transparent;
+	color: white;
+	border: 1px solid white;
+}
+
+.prefs_panel .wallpaper_thumbs {
+	margin-bottom: 20px;
+}
+
+.prefs_panel .wallpaper_thumbs img {
+	cursor: pointer;
+}
+
+.prefs_panel input[type="text"] {
+	background: transparent;
+	color: white;
+	border: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.prefs_panel input[type="checkbox"] {
+	margin: 0;
+}
+
+.prefs_row_container {
+	margin-bottom: 20px;
 }
 
 .prefs_row {
 	display: flex;
+	margin-bottom: 8px;
+}
+
+.prefs_row .label {
+	font-weight: bold;
+	flex: 1 1 0;
+}
+
+.prefs_row .field {
+	flex: 2 1 0;
 }
 
 .prefs_row .label, .prefs_row .field {
-	flex: 1 1 0;
 	overflow: hidden;
 }
 
@@ -118,7 +194,7 @@ h1 {
 .widget_outer {
 	position: absolute;
 	transition: opacity 200ms linear;
-	opacity: .3;
+	/*opacity: .3;*/
 }
 
 .widget_outer.bottom_left {
@@ -142,9 +218,11 @@ h1 {
 	text-align: right;
 }
 
+/*
 .widget_outer:hover {
 	opacity: 1;
 }
+*/
 
 svg-icon svg {
 	width: 32px;
@@ -185,7 +263,11 @@ svg-icon svg * {
 }
 
 .selectable:hover {
-	background-color: rgba(255,255,255,.4);
+	background-color: rgba(255,255,255,.4) !important;
+}
+
+.clear {
+	clear: both;
 }
 
 ::-webkit-scrollbar-track
