@@ -19,7 +19,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
-	<div class="wallpaper blurred" style="display: none;">
+	<div class="wallpaper" style="display: none;">
 		<img src=""/>
 	</div>
 	<div class="centered_box" style="display: none;">
@@ -34,7 +34,7 @@
 	<div class="widget_outer top_right">
 		<div class="weather">
 			<div class="weather_top">
-				<img class="weather_icon" src=""/>
+				<img class="weather_icon svg-icon" src=""/>
 				<div class="weather_high"></div>
 				<div class="weather_low"></div>
 			</div>
@@ -44,11 +44,29 @@
 	<div class="widget_outer bottom_left">
 		<div class="prefs_panel" style="display: none;">
 			<h1>Preferences</h1>
-			<div contentEditable data-content-type="custom_image" class="custom_image_field">
-
+			<div class="prefs_row">
+				<div class="label">Custom Image</div>
+				<div class="field">
+					<div contentEditable data-content-type="custom_image" class="custom_image_field"></div>
+				</div>
 			</div>
-			<div contentEditable data-content-type="name" class="name selectable">
-
+			<div class="prefs_row">
+				<div class="label">Name</div>
+				<div class="field">
+					<div contentEditable data-content-type="name" class="name selectable"></div>
+				</div>
+			</div>
+			<div class="prefs_row">
+				<div class="label">Location</div>
+				<div class="field">
+					<div contentEditable data-content-type="weather_location" class="weather_location selectable"></div>
+				</div>
+			</div>
+			<div class="prefs_row">
+				<div class="label">Blur Background?</div>
+				<div class="field">
+					<input type="checkbox" data-content-type="blur" class="blur"/>
+				</div>
 			</div>
 		</div>
 		<svg-icon class="prefs_button"><src href="/icons/sprite.svg#si-glyph-gear" /></svg-icon>

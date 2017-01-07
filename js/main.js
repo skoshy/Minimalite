@@ -21,6 +21,11 @@ var settings = {
 			"default": "https://source.unsplash.com/category/nature/1920x1080/daily",
 			"class": "custom_image_field",
 			"allowNewLines": false
+		},
+		"blur": {
+			"default": "false",
+			"class": "blur",
+			"type": "checkbox"
 		}
 	}
 };
@@ -69,7 +74,6 @@ chrome.storage.local.get(Object.keys(weather), function (data) {
 		!dataExists || // if we've never gotten the weather before
 		weather.timeUpdated < moment().format("x")-3600000 // or if the weather data is outdated
 	) {
-		console.log("Getting weather data...");
 		getAndUpdateWeather(weather.location);
 	}
 });
@@ -95,6 +99,7 @@ $( document ).ready(function() {
 	updatePrefsDisplay("name");
 	updatePrefsDisplay("notes");
 	updatePrefsDisplay("custom_image");
+	updatePrefsDisplay("blur");
 	updateWeatherDisplay();
 
 	// fade in
@@ -110,6 +115,13 @@ $( document ).ready(function() {
 		$('.prefs_panel').toggle();
 	});
 
+	$('input[type="checkbox"]').change(function(e) {
+		el = $(this);
+		contentType = el.attr('data-content-type');
+
+		saveSetting(this.checked, contentType, true);
+		updatePrefsDisplay(contentType);
+	});
 	$('[contentEditable]').on('keydown', function(e) {
 		el = $(e.target);
 		contentType = el.attr('data-content-type');
@@ -215,7 +227,13 @@ function prepTextForSave(text) {
 }
 
 function updatePrefsDisplay(key) {
-	$('.'+settings.contentTypes[key].class).html(prepTextForDisplay(prefs[key]));
+	els = $('.'+settings.contentTypes[key].class);
+
+	if (settings.contentTypes[key].type == "checkbox") {
+		els.attr("checked", prefs[key]);
+	} else {
+		els.html(prepTextForDisplay(prefs[key]));
+	}
 
 	if (key == "custom_image") {
 		if (prefs[key] == "") {
@@ -224,6 +242,12 @@ function updatePrefsDisplay(key) {
 		} else {
 			$('.wallpaper').css('background-image', "url("+prefs[key]+")");
 			$('.wallpaper img').attr('src', prefs[key]);
+		}
+	} else if (key == "blur") {
+		if (prefs[key]) {
+			$('.wallpaper').addClass('blurred');
+		} else {
+			$('.wallpaper').removeClass('blurred');
 		}
 	}
 }
@@ -243,6 +267,7 @@ function htmlDecode(value) {
 }
 
 function getAndUpdateWeather(location) {
+	console.log("Getting weather...");
 	$.simpleWeather({
 		location: location,
 		unit: 'f',
@@ -260,6 +285,7 @@ function getAndUpdateWeather(location) {
 }
 
 function updateWeather(weatherObj) {
+	console.log("Saving weather to local storage");
 	let keys = Object.keys(weatherObj);
 	for (i in keys) {
 		key = keys[i];
@@ -276,10 +302,11 @@ function updateWeather(weatherObj) {
 }
 
 function updateWeatherDisplay() {
+	console.log("Updating weather display");
 	if (weather.city != "") {
 		$('.weather .weather_high').html(weather.high+"&deg;");
 		$('.weather .weather_low').html(weather.low+"&deg;");
 		$('.weather .weather_icon').attr("src", "/icons/weather/"+weather.todayCode+".svg");
-		$('.weather .weather_location').html(weather.city);
+		$('.weather_location').html(weather.city);
 	}
 }
