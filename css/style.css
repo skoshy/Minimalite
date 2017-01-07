@@ -126,6 +126,10 @@ h1 {
 	float: left;
 }
 
+.prefs_panel p {
+	margin-bottom: 4px;
+}
+
 .prefs_panel a,
 .prefs_panel a:visited,
 .prefs_panel a:active,
