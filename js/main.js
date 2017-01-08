@@ -1,5 +1,22 @@
 "use strict";
 
+// constants
+var domainMatchings = {
+	"google.com": {"color": "rgba(66,133,244,.7)"},
+	"youtube.com": {"color": "rgba(255,100,100,.7)"},
+	"facebook.com": {"color": "rgba(59,89,152,.7)"},
+	"twitter.com": {"color": "rgba(29,161,242,.7)"},
+	"reddit.com": {"color": "rgba(255,69,0,.7)"},
+	"imgur.com": {"color": "rgba(27,183,110,.7)"},
+	"amazon.com": {"color": "rgba(222,181,32,.7)"},
+	"ebay.com": {"color": "rgba(228,49,55,.7)"},
+
+	"github.com": {"color": "rgba(0,0,0,.7)"},
+	"stackoverflow.com": {"color": "rgba(244,128,36,.7)"},
+	"yahoo.com": {"color": "rgba(64,0,144,.7)"},
+	"en.wikipedia.org": {"color": "rgba(207,208,210,.7)"},
+};
+
 // Get settings
 var prefs = {};
 var settings = {
@@ -50,42 +67,42 @@ var settings = {
 				{
 					"name": "Google",
 					"link": "https://google.com",
-					"color": "rgba(66,133,244,.7)"
+					"color": domainMatchings["google.com"].color
 				},
 				{
 					"name": "YouTube",
 					"link": "https://youtube.com",
-					"color": "rgba(255,100,100,.7)"
+					"color": domainMatchings["youtube.com"].color
 				},
 				{
 					"name": "Facebook",
 					"link": "https://facebook.com",
-					"color": "rgba(59,89,152,.7)"
+					"color": domainMatchings["facebook.com"].color
 				},
 				{
 					"name": "Twitter",
 					"link": "https://twitter.com",
-					"color": "rgba(29,161,242,.7)"
+					"color": domainMatchings["twitter.com"].color
 				},
 				{
 					"name": "Reddit",
 					"link": "https://reddit.com",
-					"color": "rgba(255,69,0,.7)"
+					"color": domainMatchings["reddit.com"].color
 				},
 				{
 					"name": "Imgur",
 					"link": "https://imgur.com",
-					"color": "rgba(27,183,110,.7)"
+					"color": domainMatchings["imgur.com"].color
 				},
 				{
 					"name": "Amazon",
 					"link": "https://amazon.com",
-					"color": "rgba(222,181,32,.7)"
+					"color": domainMatchings["amazon.com"].color
 				},
 				{
 					"name": "eBay",
 					"link": "https://ebay.com",
-					"color": "rgba(228,49,55,.7)"
+					"color": domainMatchings["ebay.com"].color
 				},
 			]
 		}
@@ -132,6 +149,28 @@ var weather = {
 	wind_speed: "",
 	wind_degrees: ""
 };
+
+// load in top sites into the default spot
+chrome.topSites.get(function(topSites) {
+	let maxTopSites = topSites.length;
+	$.each(settings.contentTypes.bookmarks.default, function(index, bookmark) {
+		if (index >= maxTopSites) {
+			return; // no more top sites to replace with defaults
+		}
+
+		bookmark.name = topSites[index].title;
+		bookmark.link = topSites[index].url;
+
+		// try to match the color based on the domain name. otherwise, generate a random one
+		let domainMatched = domainMatchings[getDomainFromUrl(topSites[index].url).replace(/^www\./, '')];
+		if (typeof domainMatched != "undefined") {
+			bookmark.color = domainMatched.color;
+		} else {
+			let rgb = getRandomRgb();
+			bookmark.color = "rgba("+rgb[0]+","+rgb[1]+","+rgb[2]+",.7)";
+		}
+	});
+});
 
 // Load in all data into prefs object
 chrome.storage.sync.get(Object.keys(settings.contentTypes), function (result) {
@@ -618,4 +657,16 @@ function updateWeatherDisplay() {
 		}).addClass('wi-owm-'+weather.condition_code);
 		$('.weather_location').html(weather.weather_location);
 	}
+}
+
+function getDomainFromUrl(url) {
+	return url.split('/')[url.indexOf('//') < 0 ? 0 : 2].split(/[\/?:#&]/)[0]
+};
+
+function getRandomRgb() {
+	let toReturn = [];
+	for (let i = 0; i < 3; i++) {
+		toReturn.push(Math.floor(Math.random() * 256));
+	}
+	return toReturn;
 }

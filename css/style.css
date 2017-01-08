@@ -6,10 +6,18 @@ body, input, button {
 	font-size: 14px;
 }
 
+strong {
+	font-weight: bold;
+}
+
 h1 {
 	font-size: 20px;
 	margin-bottom: 15px;
 	font-weight: bold;
+}
+
+p {
+	line-height: 1.2;
 }
 
 .wallpaper {
@@ -146,10 +154,13 @@ h1 {
 	color: #A3DEFE;
 }
 
+.prefs_panel .section {
+	margin-bottom: 15px;
+}
+
 .prefs_panel .reset_wallpaper_container {
 	float: right;
 	text-align: center;
-	margin-bottom: 20px;
 }
 
 .prefs_panel .wallpaper_thumbs {

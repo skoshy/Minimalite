@@ -66,61 +66,70 @@
 					<button class="reset_wallpaper_button">Reset back to Daily Wallpaper</button>
 				</div>
 				<div class="clear"></div>
-				<div class="wallpaper_thumbs">
+				<div class="section">
+					<div class="wallpaper_thumbs">
 
+					</div>
+					<div class="prefs_row_container">
+						<div class="prefs_row">
+							<div class="label">Custom Image</div>
+							<div class="field">
+								<input type="text" data-content-type="custom_image" class="custom_image_field selectable" value=""/>
+							</div>
+						</div>
+						<div class="prefs_row">
+							<div class="label">Blur Background?</div>
+							<div class="field">
+								<input type="checkbox" data-content-type="blur" class="blur"/>
+							</div>
+						</div>
+						<div class="prefs_row">
+							<div class="label">Dim Background?</div>
+							<div class="field">
+								<input type="checkbox" data-content-type="dim" class="dim"/>
+							</div>
+						</div>
+						<div class="prefs_row">
+							<div class="label">Name</div>
+							<div class="field">
+								<div contentEditable data-content-type="name" class="name selectable"></div>
+							</div>
+						</div>
+						<div class="prefs_row">
+							<div class="label">Location</div>
+							<div class="field">
+								<div contentEditable data-content-type="weather_location" class="weather_location selectable"></div>
+							</div>
+						</div>
+						<div class="prefs_row">
+							<div class="label">Use Celsius?</div>
+							<div class="field">
+								<input type="checkbox" data-content-type="celsius" class="celsius"/>
+							</div>
+						</div>
+						<div class="prefs_row">
+							<div class="label">Dim Corners?</div>
+							<div class="field">
+								<input type="checkbox" data-content-type="dim_corners" class="dim_corners"/>
+							</div>
+						</div>
+						<div class="prefs_row" style="margin-top: 20px;">
+							<button class="reset_settings">Reset All Settings</button>
+						</div>
+					</div>
 				</div>
-				<div class="prefs_row_container">
-					<div class="prefs_row">
-						<div class="label">Custom Image</div>
-						<div class="field">
-							<input type="text" data-content-type="custom_image" class="custom_image_field selectable" value=""/>
-						</div>
-					</div>
-					<div class="prefs_row">
-						<div class="label">Blur Background?</div>
-						<div class="field">
-							<input type="checkbox" data-content-type="blur" class="blur"/>
-						</div>
-					</div>
-					<div class="prefs_row">
-						<div class="label">Dim Background?</div>
-						<div class="field">
-							<input type="checkbox" data-content-type="dim" class="dim"/>
-						</div>
-					</div>
-					<div class="prefs_row">
-						<div class="label">Name</div>
-						<div class="field">
-							<div contentEditable data-content-type="name" class="name selectable"></div>
-						</div>
-					</div>
-					<div class="prefs_row">
-						<div class="label">Location</div>
-						<div class="field">
-							<div contentEditable data-content-type="weather_location" class="weather_location selectable"></div>
-						</div>
-					</div>
-					<div class="prefs_row">
-						<div class="label">Use Celsius?</div>
-						<div class="field">
-							<input type="checkbox" data-content-type="celsius" class="celsius"/>
-						</div>
-					</div>
-					<div class="prefs_row">
-						<div class="label">Dim Corners?</div>
-						<div class="field">
-							<input type="checkbox" data-content-type="dim_corners" class="dim_corners"/>
-						</div>
-					</div>
-					<div class="prefs_row" style="margin-top: 20px;">
-						<button class="reset_settings">Reset All Settings</button>
-					</div>
+				<h1>Bookmarks</h1>
+				<div class="clear"></div>
+				<div class="section">
+					<p>Simply <strong>right-click</strong> on one of the bookmark icons to change it to whatever site you want!</p>
 				</div>
 				<h1>Credits</h1>
 				<div class="clear"></div>
-				<p>Extension created by <a href="http://skoshy.com?ref=minimalite" target="_blank">Stefan Koshy</a></p>
-				<p>Wallpapers from <a href="http://unsplash.com" target="_blank">Unsplash</a></p>
-				<p>Weather data from <a href="http://openweathermap.org" target="_blank">Open Weather Map</a></p>
+				<div class="section">
+					<p>Extension created by <a href="http://skoshy.com?ref=minimalite" target="_blank">Stefan Koshy</a></p>
+					<p>Wallpapers from <a href="http://unsplash.com" target="_blank">Unsplash</a></p>
+					<p>Weather data from <a href="http://openweathermap.org" target="_blank">Open Weather Map</a></p>
+				</div>
 			</div>
 		</div>
 		<svg-icon class="prefs_button"><src href="/icons/sprite.svg#si-glyph-gear" /></svg-icon>
