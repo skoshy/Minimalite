@@ -27,6 +27,11 @@ var settings = {
 			"default": false,
 			"class": "blur",
 			"type": "checkbox"
+		},
+		"celsius": {
+			"default": false,
+			"class": "celsius",
+			"type": "checkbox"
 		}
 	}
 };
@@ -132,6 +137,7 @@ $( document ).ready(function() {
 	updatePrefsDisplay("notes");
 	updatePrefsDisplay("custom_image");
 	updatePrefsDisplay("blur");
+	updatePrefsDisplay("celsius");
 	updateWeatherDisplay();
 
 	// add in all wallpaper thumbs
@@ -378,12 +384,18 @@ function updatePrefsDisplay(key) {
 		} else {
 			$('.wallpaper').removeClass('blurred');
 		}
+	} else if (key == "celsius") {
+		updateWeatherDisplay();
 	}
 }
 
 function removeLinebreaksForDisplay(text) {
 	return text.replace(/(?:\r\n|\r|\n)/g, " ");
 	// .replace(/<\s*br.*?>/g, " ")
+}
+
+function convertToCelsius(fahr) {
+	return Math.round((fahr - 32) * (5/9));
 }
 
 function convertLinebreaksToBrs(text) {
@@ -451,8 +463,11 @@ function updateWeather(weatherObj) {
 function updateWeatherDisplay() {
 	console.log("Updating weather display");
 	if (weather.weather_location != "") {
-		$('.weather .weather_high').html(weather.high+"&deg;");
-		$('.weather .weather_low').html(weather.low+"&deg;");
+		high = prefs['celsius'] ? convertToCelsius(weather.high) : weather.high;
+		low = prefs['celsius'] ? convertToCelsius(weather.low) : weather.low;
+
+		$('.weather .weather_high').html(high+"&deg;");
+		$('.weather .weather_low').html(low+"&deg;");
 		$('.weather .weather_icon').removeClass(function(index, css) {
 			return (css.match(/(^|\s)wi-owm-\S+/g) || []).join(' ');
 		}).addClass('wi-owm-'+weather.condition_code);
