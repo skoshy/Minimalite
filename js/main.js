@@ -674,16 +674,14 @@ function getAndUpdateWeather(location, isUsingWeatherId) {
 	}
 
 	$.get("http://api.k0shy.com/weather/?"+param+"="+location, function( data ) {
-		$('.weather .loader').stop().fadeOut(100);
-
 		console.log("Weather received! Updating...");
 		updateWeather(data);
 		updateWeatherDisplay();
-	}).fail(function() {
+	}).fail(function(e) {
+		console.log(e);
+		$('.weather_location_container').stop().effect("highlight", {color: "ff9595"}, 2000);
+	}).always(function() {
 		$('.weather .loader').stop().fadeOut(100);
-
-		console.log(error);
-		$('.weather_location_container').effect("highlight", {color: "ff9595"}, 2000);
 	});
 }
 
