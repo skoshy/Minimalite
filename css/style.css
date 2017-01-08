@@ -247,6 +247,7 @@ h1 {
 
 .bookmarks {
 	width:  200px;
+	position: relative;
 }
 
 .bookmarks .icon {
@@ -272,6 +273,14 @@ h1 {
 .bookmarks .icon:hover {
 	border: 1px solid rgba(255,255,255,.3);
 	box-shadow: 0 0 5px rgba(255, 255, 255, .3);
+}
+
+.bookmarks_editor {
+	position: absolute;
+	right: 0;
+	width: 200px;
+	margin-right: -200px;
+	display: none;
 }
 
 /*

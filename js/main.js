@@ -1,3 +1,5 @@
+"use strict";
+
 // Get settings
 var prefs = {};
 var settings = {
@@ -134,14 +136,14 @@ var weather = {
 // Load in all data into prefs object
 chrome.storage.sync.get(Object.keys(settings.contentTypes), function (result) {
 	let keys = Object.keys(settings.contentTypes);
-	for (i in keys) {
-		key = keys[i];
+	for (let i in keys) {
+		let key = keys[i];
 		if (result.hasOwnProperty(key)) {
 			prefs[key] = result[key];
 		} else {
 			saveSetting(settings.contentTypes[key].default, key, true);
-			updatePrefsDisplay(key);
 		}
+		$( document ).ready(function() {updatePrefsDisplay(key);});
 	}
 });
 
@@ -149,8 +151,8 @@ chrome.storage.sync.get(Object.keys(settings.contentTypes), function (result) {
 chrome.storage.local.get(Object.keys(weather), function (data) {
 	let keys = Object.keys(weather);
 	let dataExists = false;
-	for (i in keys) {
-		key = keys[i];
+	for (let i in keys) {
+		let key = keys[i];
 		if (data.hasOwnProperty(key)) {
 			dataExists = true;
 			weather[key] = data[key];
@@ -167,15 +169,17 @@ chrome.storage.local.get(Object.keys(weather), function (data) {
 			getAndUpdateWeather(weather.weather_location, false);
 		}
 	}
+
+	$( document ).ready(function() {updateWeatherDisplay();});
 });
 
 $( document ).ready(function() {
-	var interval = setInterval(function() {
-		var momentNow = moment();
+	let interval = setInterval(function() {
+		let momentNow = moment();
 		$('.time').html(momentNow.format('h:mm'));
 
-		var hour = momentNow.hours();
-		var newWelcomeText;
+		let hour = momentNow.hours();
+		let newWelcomeText;
 		if (hour <= 3 || hour >= 18) {
 			newWelcomeText = 'Good evening, ';
 		} else if (hour >= 4 && hour <= 11) {
@@ -185,17 +189,6 @@ $( document ).ready(function() {
 		}
 		$('.welcome_text').html(newWelcomeText);
 	}, 100);
-
-	// initialize displays
-	updatePrefsDisplay("name");
-	updatePrefsDisplay("notes");
-	updatePrefsDisplay("custom_image");
-	updatePrefsDisplay("blur");
-	updatePrefsDisplay("dim");
-	updatePrefsDisplay("dim_corners");
-	updatePrefsDisplay("celsius");
-	updatePrefsDisplay("bookmarks");
-	updateWeatherDisplay();
 
 	// add in all wallpaper thumbs
 	addWallpaperThumbs();
@@ -207,7 +200,7 @@ $( document ).ready(function() {
 	});
 
 	$('.reset_wallpaper_button').click(function() {
-		contentType = 'custom_image';
+		let contentType = 'custom_image';
 
 		saveSetting(settings.contentTypes[contentType].default, contentType, true);
 		updatePrefsDisplay(contentType);
@@ -225,16 +218,16 @@ $( document ).ready(function() {
 	});
 
 	$('input[type="checkbox"]').change(function(e) {
-		el = $(this);
-		contentType = el.attr('data-content-type');
+		let el = $(this);
+		let contentType = el.attr('data-content-type');
 
 		saveSetting(this.checked, contentType, true);
 		updatePrefsDisplay(contentType);
 	});
 	$('[data-content-type]:not([type="checkbox"])').on('keydown', function(e) {
-		el = $(e.target);
-		contentType = el.attr('data-content-type');
-		text = getOrEditText(el, undefined, true);
+		let el = $(e.target);
+		let contentType = el.attr('data-content-type');
+		let text = getOrEditText(el, undefined, true);
 
 		// don't allow new lines if not allowed for the content type. instead, submit.
 		if (settings.contentTypes[contentType].allowNewlines === false && e.keyCode === 13) {
@@ -254,14 +247,14 @@ $( document ).ready(function() {
 		}
 	});
 	$('[data-content-type]:not([type="checkbox"])').on('drop paste', function(e) {
-		el = $(e.target);
-		originalText = getOrEditText(el, undefined, true);
+		let el = $(e.target);
+		let originalText = getOrEditText(el, undefined, true);
 
 		// cancel paste
 		e.originalEvent.preventDefault();
 
 		// get text representation of clipboard
-		var text;
+		let text;
 		if (e.type == "paste") {
 			text = e.originalEvent.clipboardData.getData("text/plain");
 		} else if (e.type == "drop") {
@@ -319,9 +312,9 @@ function getOrEditText(el, text, isPlainText) {
 	}
 
 	el = $(el);
-	tagName = el.prop('tagName');
+	let tagName = el.prop('tagName');
 
-	toReturn = '';
+	let toReturn = '';
 
 	if (tagName == "DIV" || tagName == "SPAN") {
 		if (typeof text == "undefined") {
@@ -356,8 +349,8 @@ function getOrEditText(el, text, isPlainText) {
 
 function submitContentEditable(el) {
 	el = $(el);
-	contentType = el.attr('data-content-type');
-	text = getOrEditText(el);
+	let contentType = el.attr('data-content-type');
+	let text = getOrEditText(el);
 
 	// if blank, change to default text
 	if (text == "") {
@@ -382,9 +375,10 @@ function submitContentEditable(el) {
 
 function saveSetting(newText, key, isSync) {
 	prefs[key] = newText;
-	newSetting = {};
+	let newSetting = {};
 	newSetting[key] = newText;
 
+	let storageType;
 	if (isSync) {
 		storageType = "sync";
 	} else {
@@ -396,7 +390,7 @@ function saveSetting(newText, key, isSync) {
 }
 
 function confirmResetSettings() {
-	var r = confirm("Are you sure you want to reset all your Minimalite settings?");
+	let r = confirm("Are you sure you want to reset all your Minimalite settings?");
 	if (r == true) {
 		resetSettings();
 	}
@@ -417,7 +411,7 @@ function prepTextForSave(text) {
 }
 
 function updatePrefsDisplay(key) {
-	els = $('.'+settings.contentTypes[key].class);
+	let els = $('.'+settings.contentTypes[key].class);
 
 	if (els.length != 0) {
 		if (settings.contentTypes[key].type == "checkbox") {
@@ -440,6 +434,9 @@ function updatePrefsDisplay(key) {
 					.addClass('icon')
 					.attr('href', bookmark.link)
 					.html(bookmark.name.substring(0,2))
+					.contextmenu(function() {
+						
+					})
 			);
 		});
 	} else if (key == "custom_image") {
@@ -493,16 +490,16 @@ function convertBrsToLinebreaks(text) {
 function htmlEncode(value){
 	//create a in-memory div, set it's inner text(which jQuery automatically encodes)
 	//then grab the encoded contents back out.  The div never exists on the page.
-	newlineDelim = '%%%%%html_decode_newline%%%%%';
-	pattern = new RegExp(newlineDelim, 'g');
+	let newlineDelim = '%%%%%html_decode_newline%%%%%';
+	let pattern = new RegExp(newlineDelim, 'g');
 	return $('<div/>').text(
 		value.replace(/(?:\r\n|\r|\n)/g, newlineDelim)
 	).html().replace(pattern, "\n");
 }
 
 function htmlDecode(value) {
-	newlineDelim = '%%%%%html_decode_newline%%%%%';
-	pattern = new RegExp(newlineDelim, 'g');
+	let newlineDelim = '%%%%%html_decode_newline%%%%%';
+	let pattern = new RegExp(newlineDelim, 'g');
 	return $('<div/>').html(
 		value.replace(/(?:\r\n|\r|\n)/g, newlineDelim)
 	).text().replace(pattern, "\n");
@@ -511,6 +508,7 @@ function htmlDecode(value) {
 function getAndUpdateWeather(location, isUsingWeatherId) {
 	console.log("Getting weather...");
 
+	let param;
 	if (isUsingWeatherId) {
 		param = 'id';
 	} else {
@@ -530,8 +528,8 @@ function getAndUpdateWeather(location, isUsingWeatherId) {
 function updateWeather(weatherObj) {
 	console.log("Saving weather to local storage");
 	let keys = Object.keys(weatherObj);
-	for (i in keys) {
-		key = keys[i];
+	for (let i in keys) {
+		let key = keys[i];
 
 		if (weatherObj.hasOwnProperty(key)) {
 			weather[key] = weatherObj[key];
@@ -547,8 +545,8 @@ function updateWeather(weatherObj) {
 function updateWeatherDisplay() {
 	console.log("Updating weather display");
 	if (weather.weather_location != "") {
-		high = prefs['celsius'] ? convertToCelsius(weather.high) : weather.high;
-		low = prefs['celsius'] ? convertToCelsius(weather.low) : weather.low;
+		let high = prefs['celsius'] ? convertToCelsius(weather.high) : weather.high;
+		let low = prefs['celsius'] ? convertToCelsius(weather.low) : weather.low;
 
 		$('.weather .weather_high').html(high+"&deg;");
 		$('.weather .weather_low').html(low+"&deg;");
