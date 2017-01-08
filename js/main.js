@@ -19,7 +19,7 @@ var settings = {
 			"maxCharacters": 30
 		},
 		"custom_image": {
-			"default": "https://source.unsplash.com/category/nature/1920x1080/daily",
+			"default": "https://source.unsplash.com/category/nature/1280x720/daily",
 			"class": "custom_image_field",
 			"allowNewlines": false
 		},
@@ -203,7 +203,7 @@ $( document ).ready(function() {
 	// fade in
 	$('.centered_box').fadeIn();
 	$('.wallpaper img').on("load", function(e) {
-		$(this).parent().fadeIn();
+		$(this).parent().fadeIn(50);
 	});
 
 	$('.reset_wallpaper_button').click(function() {
@@ -298,7 +298,7 @@ function addWallpaperThumbs() {
 		$('.wallpaper_thumbs').append(
 			$('<img>')
 				.attr('src', wallpaper.image+"/84x65")
-				.attr('value', wallpaper.image+"/1920x1080")
+				.attr('value', wallpaper.image+"/1280x720")
 				.attr('data-content-type', 'custom_image')
 				.click(function() {
 					submitContentEditable(this);
