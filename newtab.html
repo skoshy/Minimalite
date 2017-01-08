@@ -49,12 +49,22 @@
 	</div>
 	<div class="widget_outer dimmed top_right">
 		<div class="weather">
-			<div class="weather_top">
-				<i class="weather_icon svg-icon wi"></i>
-				<div class="weather_high"></div>
-				<div class="weather_low"></div>
+			<div class="weather_currently">
+				<div class="weather_top">
+					<i class="weather_icon svg-icon wi"></i>
+					<div class="weather_high"></div>
+					<div class="weather_low"></div>
+				</div>
+				<div class="weather_location_container">
+					<div class="loader" style="display: none;"></div>
+					<span contentEditable data-content-type="weather_location" class="weather_location selectable"></span>
+				</div>
 			</div>
-			<div class="weather_location_container"><span contentEditable data-content-type="weather_location" class="weather_location selectable"></span></div>
+			<div class="weather_forecast_container" style="display: none;">
+				<div class="weather_forecast">
+					<iframe></iframe>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="widget_outer dimmed bottom_left">

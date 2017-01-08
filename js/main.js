@@ -146,6 +146,8 @@ var weather = {
 	weather_location: "New York",
 	weather_location_id: "",
 	currently: "",
+	lat: "",
+	lon: "",
 	low: "",
 	high: "",
 	temp: "",
@@ -245,6 +247,14 @@ $( document ).ready(function() {
 	});
 	$('.bookmarks_editor .bookmarks_button_cancel').click(function() {
 		hideBookmarkEditor();
+	});
+	
+	// weather
+	$('.weather_currently').mouseenter(function() {
+		$('.weather_forecast_container').stop().fadeIn(200);
+	});
+	$('.weather').mouseleave(function() {
+		$('.weather_forecast_container').stop().fadeOut(200);
 	});
 	
 
@@ -617,8 +627,12 @@ function removeLinebreaksForDisplay(text) {
 	// .replace(/<\s*br.*?>/g, " ")
 }
 
-function convertToCelsius(fahr) {
-	return Math.round((fahr - 32) * (5/9));
+function prepTemperature(fahr) {
+	if (prefs['celsius']) {
+		return Math.round((fahr - 32) * (5/9));
+	} else {
+		return Math.round(fahr);
+	}
 }
 
 function convertLinebreaksToBrs(text) {
@@ -650,6 +664,8 @@ function htmlDecode(value) {
 function getAndUpdateWeather(location, isUsingWeatherId) {
 	console.log("Getting weather...");
 
+	$('.weather .loader').stop().fadeIn(100);
+
 	let param;
 	if (isUsingWeatherId) {
 		param = 'id';
@@ -658,10 +674,14 @@ function getAndUpdateWeather(location, isUsingWeatherId) {
 	}
 
 	$.get("http://api.k0shy.com/weather/?"+param+"="+location, function( data ) {
+		$('.weather .loader').stop().fadeOut(100);
+
 		console.log("Weather received! Updating...");
 		updateWeather(data);
 		updateWeatherDisplay();
 	}).fail(function() {
+		$('.weather .loader').stop().fadeOut(100);
+
 		console.log(error);
 		$('.weather_location_container').effect("highlight", {color: "ff9595"}, 2000);
 	});
@@ -687,8 +707,8 @@ function updateWeather(weatherObj) {
 function updateWeatherDisplay() {
 	console.log("Updating weather display");
 	if (weather.weather_location != "") {
-		let high = prefs['celsius'] ? convertToCelsius(weather.high) : weather.high;
-		let low = prefs['celsius'] ? convertToCelsius(weather.low) : weather.low;
+		let high = prepTemperature(weather.high);
+		let low = prepTemperature(weather.low);
 
 		$('.weather .weather_high').html(high+"&deg;");
 		$('.weather .weather_low').html(low+"&deg;");
@@ -696,6 +716,8 @@ function updateWeatherDisplay() {
 			return (css.match(/(^|\s)wi-owm-\S+/g) || []).join(' ');
 		}).addClass('wi-owm-'+weather.condition_code);
 		$('.weather_location').html(weather.weather_location);
+		$('.weather_forecast iframe').attr('src', '');
+		$('.weather_forecast iframe').attr('src', 'https://forecast.io/embed/#name=this%20week&lat='+weather.lat+'&lon='+weather.lon);
 	}
 }
 
