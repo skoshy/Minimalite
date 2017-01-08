@@ -474,9 +474,10 @@ function updatePrefsDisplay(key) {
 	if (key == "bookmarks") {
 		// first, delete all icons in the area
 		$('.bookmarks .icon').remove();
+		hideBookmarkEditor();
 		// now re-add all of them
 		$.each(prefs[key], function(index, bookmark) {
-			$('.bookmarks').append(
+			$('.bookmarks .icons-container').append(
 				$('<a>')
 					.css('background-color', bookmark.color)
 					.addClass('icon')
@@ -489,6 +490,13 @@ function updatePrefsDisplay(key) {
 						return false;
 					})
 			);
+		});
+		$('.bookmarks .icons-container').sortable({
+			stop: function(e, ui) {
+				let bookmarksJson = getBookmarkIconsAsJson();
+				saveSetting(bookmarksJson, 'bookmarks', true);
+				updatePrefsDisplay('bookmarks');
+			}
 		});
 	} else if (key == "custom_image") {
 		if (prefs[key] == "") {
