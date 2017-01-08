@@ -25,22 +25,26 @@ var settings = {
 			"allowNewlines": false,
 			"default": "Human",
 			"maxCharacters": 30,
-			"class": "name"
+			"class": "name",
+			"autoSelect": true,
 		},
 		"notes": {
 			"default": "Type notes here",
 			"class": "notes",
-			"allowNewlines": true
+			"allowNewlines": true,
+			"autoSelect": true,
 		},
 		"weather_location": {
 			"default": "",
 			"allowNewlines": false,
-			"maxCharacters": 30
+			"maxCharacters": 30,
+			"autoSelect": true,
 		},
 		"custom_image": {
 			"default": "https://source.unsplash.com/category/nature/1280x720/daily",
 			"class": "custom_image_field",
-			"allowNewlines": false
+			"allowNewlines": false,
+			"autoSelect": true,
 		},
 		"blur": {
 			"default": false,
@@ -233,6 +237,9 @@ $( document ).ready(function() {
 	addWallpaperThumbs();
 
 	// bookmarks stuff
+	$('.bookmarks_editor input').on('focus click', function() {
+		selectTextIfNeeded(this);
+	})
 	$('.bookmarks_editor .bookmarks_button_save').click(function() {
 		saveBookmarks();
 	});
@@ -271,6 +278,15 @@ $( document ).ready(function() {
 
 		saveSetting(this.checked, contentType, true);
 		updatePrefsDisplay(contentType);
+	});
+
+	// makes it easy to focus on editable items. will auto select them, if the settings say to do so.
+	$('[data-content-type]:not([type="checkbox"])').on("focus click", function(e) {
+		let el = $(this);
+		let contentType = el.attr('data-content-type');
+		if (settings.contentTypes[contentType].autoSelect) {
+			selectTextIfNeeded(this);
+		}
 	});
 	$('[data-content-type]:not([type="checkbox"])').on('keydown', function(e) {
 		let el = $(e.target);
@@ -540,7 +556,23 @@ function showBookmarkEditor(el) {
 	bookmarksEditor.stop().fadeIn(200);
 	bookmarksEditor.find('.bookmark_name').val(el.attr('title'));
 	bookmarksEditor.find('.bookmark_link').val(el.attr('href'));
-	bookmarksEditor.find('.bookmark_color').val(el.css('background-color')).colorPicker();
+	bookmarksEditor.find('.bookmark_color').val(el.css('background-color')).colorPicker({
+			positionCallback: function($elm) {
+				let $UI = this.$UI; // this is the instance; this.$UI is the colorPicker DOMElement
+				let parent = $('.bookmarks_editor');
+				let position = $elm.offset(); // $elm is the current trigger that opened the UI
+				let gap = this.color.options.gap; // this.color.options stores all options
+				let top = parent.offset().top;
+				let left = parent.offset().left+parent.width()+parseInt(parent.css('padding-left'))+parseInt(parent.css('padding-right'));
+
+				// $UI.appendTo('#somwhereElse');
+				// do here your calculations with top and left and then...
+				return { // the object will be used as in $('.something').css({...});
+					left: left,
+					top: top
+				}
+			}
+	});
 }
 
 function hideBookmarkEditor() {
@@ -677,4 +709,36 @@ function getRandomRgb() {
 		toReturn.push(Math.floor(Math.random() * 256));
 	}
 	return toReturn;
+}
+
+function getSelectionText() {
+	let text = "";
+	let activeEl = document.activeElement;
+	let activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null;
+	
+	if (
+		(activeElTagName == "textarea" || activeElTagName == "input") &&
+		/^(?:text|search|password|tel|url)$/i.test(activeEl.type) &&
+		(typeof activeEl.selectionStart == "number")
+	) {
+		text = activeEl.value.slice(activeEl.selectionStart, activeEl.selectionEnd);
+	} else if (window.getSelection) {
+		text = window.getSelection().toString();
+	}
+	return text;
+}
+
+function selectTextIfNeeded(el) {
+	el = $(el);
+
+	// if this property should be auto selected, select it
+	if (getSelectionText() == "") {
+		let tagName = el.prop('tagName');
+		if (tagName == "INPUT" || tagName == "TEXTAREA") {
+			el.select();
+		} else {
+			// need to execute this command for contentEditable things
+			document.execCommand('selectAll',false,null);
+		}
+	}
 }
