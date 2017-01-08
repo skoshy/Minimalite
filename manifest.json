@@ -9,7 +9,7 @@
 	"chrome_url_overrides" : {
 		"newtab": "newtab.html"
 	},
-	"content_security_policy": "script-src 'self' https://query.yahooapis.com https://code.jquery.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com; object-src 'self'",
+	"content_security_policy": "script-src 'self' https://code.jquery.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com; object-src 'self'",
 	"permissions": [
 		"storage"
 	]

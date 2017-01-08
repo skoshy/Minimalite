@@ -112,6 +112,7 @@ h1 {
 	padding: 14px;
 	margin-bottom: 25px;
 	position: relative;
+	text-align: left;
 }
 
 .prefs_panel_inner {
