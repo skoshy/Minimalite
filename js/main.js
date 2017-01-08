@@ -443,7 +443,7 @@ function updatePrefsDisplay(key) {
 					.addClass('icon')
 					.attr('data-color', bookmark.color)
 					.attr('href', bookmark.link)
-					.attr('data-name', bookmark.name)
+					.attr('title', bookmark.name)
 					.html(bookmark.name.substring(0,2))
 					.contextmenu(function() {
 						showBookmarkEditor(this);
@@ -491,7 +491,7 @@ function showBookmarkEditor(el) {
 	el.addClass('being_edited');
 
 	bookmarksEditor.stop().fadeIn(200);
-	bookmarksEditor.find('.bookmark_name').val(el.attr('data-name'));
+	bookmarksEditor.find('.bookmark_name').val(el.attr('title'));
 	bookmarksEditor.find('.bookmark_link').val(el.attr('href'));
 	bookmarksEditor.find('.bookmark_color').val(el.css('background-color')).colorPicker();
 }
@@ -509,7 +509,7 @@ function saveBookmarks() {
 	let bookmarksEditor = $('.bookmarks_editor');
 	let el = $('.bookmarks .icon.being_edited');
 
-	el.attr('data-name', bookmarksEditor.find('.bookmark_name').val());
+	el.attr('title', bookmarksEditor.find('.bookmark_name').val());
 	el.attr('href', bookmarksEditor.find('.bookmark_link').val());
 	el.attr('data-color', bookmarksEditor.find('.bookmark_color').val());
 
@@ -525,7 +525,7 @@ function getBookmarkIconsAsJson() {
 		bookmarkIcon = $(bookmarkIcon);
 
 		bookmarkArray.push({
-			"name": bookmarkIcon.attr('data-name'),
+			"name": bookmarkIcon.attr('title'),
 			"link": bookmarkIcon.attr('href'),
 			"color": bookmarkIcon.attr('data-color'),
 		});
