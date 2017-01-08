@@ -34,6 +34,14 @@ h1 {
 	left: -6px;
 }
 
+.wallpaper.dimmed {
+	filter: brightness(.75);
+}
+
+.wallpaper.blurred.dimmed {
+	filter: blur(3px) brightness(.75);
+}
+
 .wallpaper img {
 	width: 100%;
 	height: 100%;

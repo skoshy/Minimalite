@@ -28,6 +28,11 @@ var settings = {
 			"class": "blur",
 			"type": "checkbox"
 		},
+		"dim": {
+			"default": true,
+			"class": "dim",
+			"type": "checkbox"
+		},
 		"celsius": {
 			"default": false,
 			"class": "celsius",
@@ -137,6 +142,7 @@ $( document ).ready(function() {
 	updatePrefsDisplay("notes");
 	updatePrefsDisplay("custom_image");
 	updatePrefsDisplay("blur");
+	updatePrefsDisplay("dim");
 	updatePrefsDisplay("celsius");
 	updateWeatherDisplay();
 
@@ -386,6 +392,12 @@ function updatePrefsDisplay(key) {
 		}
 	} else if (key == "celsius") {
 		updateWeatherDisplay();
+	} else if (key == "dim") {
+		if (prefs[key]) {
+			$('.wallpaper').addClass('dimmed');
+		} else {
+			$('.wallpaper').removeClass('dimmed');
+		}
 	}
 }
 
