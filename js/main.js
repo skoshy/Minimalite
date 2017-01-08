@@ -193,6 +193,15 @@ $( document ).ready(function() {
 	// add in all wallpaper thumbs
 	addWallpaperThumbs();
 
+	// bookmarks stuff
+	$('.bookmarks_editor .bookmarks_button_save').click(function() {
+		saveBookmarks();
+	});
+	$('.bookmarks_editor .bookmarks_button_cancel').click(function() {
+		hideBookmarkEditor();
+	});
+	
+
 	// fade in
 	$('.centered_box').fadeIn();
 	$('.wallpaper img').on("load", function(e) {
@@ -432,10 +441,13 @@ function updatePrefsDisplay(key) {
 				$('<a>')
 					.css('background-color', bookmark.color)
 					.addClass('icon')
+					.attr('data-color', bookmark.color)
 					.attr('href', bookmark.link)
+					.attr('data-name', bookmark.name)
 					.html(bookmark.name.substring(0,2))
 					.contextmenu(function() {
-						
+						showBookmarkEditor(this);
+						return false;
 					})
 			);
 		});
@@ -468,6 +480,57 @@ function updatePrefsDisplay(key) {
 			$('.widget_outer').removeClass('dimmed');
 		}
 	}
+}
+
+function showBookmarkEditor(el) {
+	el = $(el);
+	let bookmarksEditor = $('.bookmarks_editor');
+
+	// designate this is the bookmark being edited
+	$('.bookmarks .icon').removeClass('being_edited');
+	el.addClass('being_edited');
+
+	bookmarksEditor.stop().fadeIn(200);
+	bookmarksEditor.find('.bookmark_name').val(el.attr('data-name'));
+	bookmarksEditor.find('.bookmark_link').val(el.attr('href'));
+	bookmarksEditor.find('.bookmark_color').val(el.css('background-color')).colorPicker();
+}
+
+function hideBookmarkEditor() {
+	let bookmarksEditor = $('.bookmarks_editor');
+	let el = $('.bookmarks .icon.being_edited');
+
+	bookmarksEditor.fadeOut(200);
+	el.removeClass('being_edited');
+}
+
+function saveBookmarks() {
+	// we will gather all the data for the bookmarks into the same standardized json format. then we'll pass it to the save and update functions like normal
+	let bookmarksEditor = $('.bookmarks_editor');
+	let el = $('.bookmarks .icon.being_edited');
+
+	el.attr('data-name', bookmarksEditor.find('.bookmark_name').val());
+	el.attr('href', bookmarksEditor.find('.bookmark_link').val());
+	el.attr('data-color', bookmarksEditor.find('.bookmark_color').val());
+
+	let bookmarksJson = getBookmarkIconsAsJson();
+	saveSetting(bookmarksJson, 'bookmarks', true);
+	updatePrefsDisplay('bookmarks');
+}
+
+function getBookmarkIconsAsJson() {
+	let bookmarkIcons = $('.bookmarks .icon');
+	let bookmarkArray = [];
+	$.each(bookmarkIcons, function(index, bookmarkIcon) {
+		bookmarkIcon = $(bookmarkIcon);
+
+		bookmarkArray.push({
+			"name": bookmarkIcon.attr('data-name'),
+			"link": bookmarkIcon.attr('href'),
+			"color": bookmarkIcon.attr('data-color'),
+		});
+	});
+	return bookmarkArray;
 }
 
 function removeLinebreaksForDisplay(text) {

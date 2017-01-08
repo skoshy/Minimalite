@@ -1,4 +1,4 @@
-body {
+body, input, button {
 	color: white;
 	text-shadow: 0px 0px 12px #000000;
 	font-family: 'Roboto', sans-serif;
@@ -152,12 +152,6 @@ h1 {
 	margin-bottom: 20px;
 }
 
-.prefs_panel button {
-	background: transparent;
-	color: white;
-	border: 1px solid white;
-}
-
 .prefs_panel .wallpaper_thumbs {
 	margin-bottom: 20px;
 }
@@ -166,7 +160,13 @@ h1 {
 	cursor: pointer;
 }
 
-.prefs_panel input[type="text"] {
+button {
+	background: transparent;
+	color: white;
+	border: 1px solid white;
+}
+
+input[type="text"] {
 	background: transparent;
 	color: white;
 	border: 0;
@@ -174,7 +174,7 @@ h1 {
 	width: 100%;
 }
 
-.prefs_panel input[type="checkbox"] {
+input[type="checkbox"] {
 	margin: 0;
 }
 
@@ -270,7 +270,7 @@ h1 {
 	margin-bottom: 10px;
 }
 
-.bookmarks .icon:hover {
+.bookmarks .icon:hover, .bookmarks .icon.being_edited {
 	border: 1px solid rgba(255,255,255,.3);
 	box-shadow: 0 0 5px rgba(255, 255, 255, .3);
 }
@@ -281,6 +281,13 @@ h1 {
 	width: 200px;
 	margin-right: -200px;
 	display: none;
+	padding: 8px;
+	background-color: rgba(0,0,0,.7);
+	border-radius: 10px;
+}
+
+.bookmarks_editor .buttons_container {
+	margin-top: 8px;
 }
 
 /*
