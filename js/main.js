@@ -33,10 +33,59 @@ var settings = {
 			"class": "dim",
 			"type": "checkbox"
 		},
+		"dim_corners": {
+			"default": false,
+			"class": "dim_corners",
+			"type": "checkbox"
+		},
 		"celsius": {
 			"default": false,
 			"class": "celsius",
 			"type": "checkbox"
+		},
+		"bookmarks": {
+			"default": [
+				{
+					"name": "Google",
+					"link": "https://google.com",
+					"color": "rgba(66,133,244,.7)"
+				},
+				{
+					"name": "YouTube",
+					"link": "https://youtube.com",
+					"color": "rgba(255,100,100,.7)"
+				},
+				{
+					"name": "Facebook",
+					"link": "https://facebook.com",
+					"color": "rgba(59,89,152,.7)"
+				},
+				{
+					"name": "Twitter",
+					"link": "https://twitter.com",
+					"color": "rgba(29,161,242,.7)"
+				},
+				{
+					"name": "Reddit",
+					"link": "https://reddit.com",
+					"color": "rgba(255,69,0,.7)"
+				},
+				{
+					"name": "Imgur",
+					"link": "https://imgur.com",
+					"color": "rgba(27,183,110,.7)"
+				},
+				{
+					"name": "Amazon",
+					"link": "https://amazon.com",
+					"color": "rgba(222,181,32,.7)"
+				},
+				{
+					"name": "eBay",
+					"link": "https://ebay.com",
+					"color": "rgba(228,49,55,.7)"
+				},
+			]
 		}
 	}
 };
@@ -143,7 +192,9 @@ $( document ).ready(function() {
 	updatePrefsDisplay("custom_image");
 	updatePrefsDisplay("blur");
 	updatePrefsDisplay("dim");
+	updatePrefsDisplay("dim_corners");
 	updatePrefsDisplay("celsius");
+	updatePrefsDisplay("bookmarks");
 	updateWeatherDisplay();
 
 	// add in all wallpaper thumbs
@@ -368,15 +419,30 @@ function prepTextForSave(text) {
 function updatePrefsDisplay(key) {
 	els = $('.'+settings.contentTypes[key].class);
 
-	if (settings.contentTypes[key].type == "checkbox") {
-		els.attr("checked", prefs[key]);
-	} else {
-		$.each(els, function(index, el) {
-			getOrEditText(el, prefs[key]);
-		});
+	if (els.length != 0) {
+		if (settings.contentTypes[key].type == "checkbox") {
+			els.attr("checked", prefs[key]);
+		} else {
+			$.each(els, function(index, el) {
+				getOrEditText(el, prefs[key]);
+			});
+		}
 	}
 
-	if (key == "custom_image") {
+	if (key == "bookmarks") {
+		// first, delete all icons in the area
+		$('.bookmarks .icon').remove();
+		// now re-add all of them
+		$.each(prefs[key], function(index, bookmark) {
+			$('.bookmarks').append(
+				$('<a>')
+					.css('background-color', bookmark.color)
+					.addClass('icon')
+					.attr('href', bookmark.link)
+					.html(bookmark.name.substring(0,2))
+			);
+		});
+	} else if (key == "custom_image") {
 		if (prefs[key] == "") {
 			$('.wallpaper').css('background-image', "");
 			$('.wallpaper img').attr('src', "");
@@ -397,6 +463,12 @@ function updatePrefsDisplay(key) {
 			$('.wallpaper').addClass('dimmed');
 		} else {
 			$('.wallpaper').removeClass('dimmed');
+		}
+	} else if (key == "dim_corners") {
+		if (prefs[key]) {
+			$('.widget_outer').addClass('dimmed');
+		} else {
+			$('.widget_outer').removeClass('dimmed');
 		}
 	}
 }

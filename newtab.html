@@ -30,7 +30,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="widget_outer top_right">
+	<div class="widget_outer dimmed top_left">
+		<div class="bookmarks"></div>
+	</div>
+	<div class="widget_outer dimmed top_right">
 		<div class="weather">
 			<div class="weather_top">
 				<i class="weather_icon svg-icon wi"></i>
@@ -40,12 +43,10 @@
 			<div class="weather_location_container"><span contentEditable data-content-type="weather_location" class="weather_location selectable"></span></div>
 		</div>
 	</div>
-	<div class="widget_outer bottom_left">
-		<div contentEditable data-content-type="notes" class="notes selectable">
-			
-		</div>
+	<div class="widget_outer dimmed bottom_left">
+		<div contentEditable data-content-type="notes" class="notes selectable"></div>
 	</div>
-	<div class="widget_outer bottom_right">
+	<div class="widget_outer dimmed bottom_right">
 		<div class="prefs_panel" style="display: none;">
 			<div class="triangle"></div>
 			<div class="prefs_panel_inner">
@@ -92,6 +93,12 @@
 						<div class="label">Use Celsius?</div>
 						<div class="field">
 							<input type="checkbox" data-content-type="celsius" class="celsius"/>
+						</div>
+					</div>
+					<div class="prefs_row">
+						<div class="label">Dim Corners?</div>
+						<div class="field">
+							<input type="checkbox" data-content-type="dim_corners" class="dim_corners"/>
 						</div>
 					</div>
 					<div class="prefs_row" style="margin-top: 20px;">
