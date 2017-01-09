@@ -334,8 +334,8 @@ input[type="checkbox"] {
 .bookmarks_editor {
 	position: absolute;
 	right: 0;
-	width: 200px;
-	margin-right: -200px;
+	width: 300px;
+	margin-right: -300px;
 	display: none;
 	padding: 8px;
 	background-color: rgba(0,0,0,.7);
