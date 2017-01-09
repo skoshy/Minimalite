@@ -29,7 +29,12 @@ var domainMatchings = {
 	"tumblr.com": {"color": "rgba(54,70,93,.7)"},
 	"pinterest.com": {"color": "rgba(181,0,18,.7)"},
 	"espn.com": {"color": "rgba(221,0,0,.7)"},
+	"okcupid.com": {"color": "rgba(255,89,126,.7)"},
 	"craigslist.org": {"color": "rgba(85,26,139,.7)"},
+	"messenger.com": {"color": "rgba(0,132,255,.7)"},
+	"web.whatsapp.com": {"color": "rgba(52,191,73,.7)"},
+	"papajohns.com": {"color": "rgba(223,30,57,.7)"},
+	"play.hbogo.com": {"color": "rgba(46,176,229,.7)"},
 };
 
 // Get settings
@@ -772,7 +777,7 @@ function selectTextIfNeeded(el) {
 		let tagName = el.prop('tagName');
 		if (tagName == "INPUT" || tagName == "TEXTAREA") {
 			el.select();
-		} else {
+		} else if (typeof el.attr('contentEditable') != "undefined") {
 			// need to execute this command for contentEditable things
 			document.execCommand('selectAll',false,null);
 		}
