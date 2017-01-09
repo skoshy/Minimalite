@@ -487,6 +487,17 @@ function updatePrefsDisplay(key) {
 				.attr('data-icon', bookmark.icon)
 				.attr('href', bookmark.link)
 				.attr('title', bookmark.name)
+				.attr('tabindex', '1')
+				.keydown(function(e) {
+					if (e.keyCode == 13 || e.keyCode == 32) { // if enter or space pressed, trigger link
+						let href = $(this).attr('href');
+
+						if (typeof href != "undefined") {
+							window.location.href = href;
+							return false;
+						}
+					}
+				})
 				.contextmenu(function() {
 					showBookmarkEditor(this);
 					return false;
