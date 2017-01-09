@@ -2,39 +2,42 @@
 
 // constants
 var domainMatchings = {
-	"google.com": {"color": "rgba(66,133,244,.7)"},
-	"youtube.com": {"color": "rgba(255,100,100,.7)"},
-	"facebook.com": {"color": "rgba(59,89,152,.7)"},
-	"twitter.com": {"color": "rgba(29,161,242,.7)"},
-	"reddit.com": {"color": "rgba(255,69,0,.7)"},
-	"imgur.com": {"color": "rgba(27,183,110,.7)"},
-	"amazon.com": {"color": "rgba(222,181,32,.7)"},
-	"ebay.com": {"color": "rgba(228,49,55,.7)"},
+	"google.com": {"color": "rgba(66,133,244,0.7)", "icon": "/icons/sites/google.svg"},
+	"youtube.com": {"color": "rgba(224,47,47,.7)", "icon": "/icons/sites/youtube.svg"},
+	"facebook.com": {"color": "rgba(59,89,152,.7)", "icon": "/icons/sites/facebook.svg"},
+	"twitter.com": {"color": "rgba(29,161,242,.7)", "icon": "/icons/sites/twitter.svg"},
+	"reddit.com": {"color": "rgba(255,69,0,.7)", "icon": "/icons/sites/reddit.svg"},
+	"imgur.com": {"color": "rgba(0,0,0,.7)", "icon": "/icons/sites/imgur.svg"},
+	"amazon.com": {"color": "rgba(246,166,31,.7)", "icon": "/icons/sites/amazon.svg"},
+	"ebay.com": {"color": "rgba(255,255,255,.7)", "icon": "/icons/sites/ebay.svg"},
 
-	"github.com": {"color": "rgba(0,0,0,.7)"},
+	"github.com": {"color": "rgba(0,0,0,.7)", "icon": "/icons/sites/github.svg"},
 	"stackoverflow.com": {"color": "rgba(244,128,36,.7)"},
-	"yahoo.com": {"color": "rgba(64,0,144,.7)"},
+	"yahoo.com": {"color": "rgba(64,0,144,.7)", "icon": "/icons/sites/yahoo.svg"},
 	"en.wikipedia.org": {"color": "rgba(207,208,210,.7)"},
-	"netflix.com": {"color": "rgba(229,9,20,.7)"},
-	"hulu.com": {"color": "rgba(102,170,51,.7)"},
-	"soundcloud.com": {"color": "rgba(255,85,0,.7)"},
-	"play.spotify.com": {"color": "rgba(132,189,0,.7)"},
-	"cnn.com": {"color": "rgba(204,0,0,.7)"},
+	"netflix.com": {"color": "rgba(229,9,20,.7)", "icon": "/icons/sites/netflix.svg"},
+	"hulu.com": {"color": "rgba(102,170,51,.7)", "icon": "/icons/sites/hulu.svg"},
+	"soundcloud.com": {"color": "rgba(255,85,0,.7)", "icon": "/icons/sites/soundcloud.svg"},
+	"play.spotify.com": {"color": "rgba(0,217,95,.7)", "icon": "/icons/sites/spotify.svg"},
+	"cnn.com": {"color": "rgba(204,0,0,.7)", "icon": "/icons/sites/cnn.svg"},
 	"nytimes.com": {"color": "rgba(26,26,26,.7)"},
 	"baidu.com": {"color": "rgba(33,41,214,.7)"},
 	"qq.com": {"color": "rgba(59,148,214,.7)"},
 	"duolingo.com": {"color": "rgba(126,181,48,.7)"},
 	"vk.com": {"color": "rgba(80,114,153,.7)"},
-	"linkedin.com": {"color": "rgba(0,119,181,.7)"},
-	"tumblr.com": {"color": "rgba(54,70,93,.7)"},
+	"linkedin.com": {"color": "rgba(0,119,181,.7)", "icon": "/icons/sites/linkedin.svg"},
+	"tumblr.com": {"color": "rgba(54,70,93,.7)", "icon": "/icons/sites/tumblr.svg"},
 	"pinterest.com": {"color": "rgba(181,0,18,.7)"},
-	"espn.com": {"color": "rgba(221,0,0,.7)"},
-	"okcupid.com": {"color": "rgba(255,89,126,.7)"},
-	"craigslist.org": {"color": "rgba(85,26,139,.7)"},
-	"messenger.com": {"color": "rgba(0,132,255,.7)"},
-	"web.whatsapp.com": {"color": "rgba(52,191,73,.7)"},
+	"espn.com": {"color": "rgba(221,0,0,.7)", "icon": "/icons/sites/espn.svg"},
+	"okcupid.com": {"color": "rgba(255,89,126,.7)", "icon": "/icons/sites/okcupid.svg"},
+	"craigslist.org": {"color": "rgba(85,26,139,.7)", "icon": "/icons/sites/craigslist.svg"},
+	"messenger.com": {"color": "rgba(0,132,255,.7)", "icon": "/icons/sites/messenger.svg"},
+	"web.whatsapp.com": {"color": "rgba(52,191,73,.7)", "icon": "/icons/sites/whatsapp.svg"},
 	"papajohns.com": {"color": "rgba(223,30,57,.7)"},
-	"play.hbogo.com": {"color": "rgba(46,176,229,.7)"},
+	"play.hbogo.com": {"color": "rgba(46,176,229,.7)", "icon": "/icons/sites/hbo.svg"},
+	"photos.google.com": {"color": "rgba(255,255,255,.7)", "icon": "/icons/sites/googlephotos.svg"},
+	"drive.google.com": {"color": "rgba(0,0,0,.7)", "icon": "/icons/sites/googledrive.svg"},
+	"docs.google.com": {"color": "rgba(0,0,0,.7)", "icon": "/icons/sites/googledrive.svg"},
 };
 
 // Get settings
@@ -91,42 +94,50 @@ var settings = {
 				{
 					"name": "Google",
 					"link": "https://google.com",
-					"color": domainMatchings["google.com"].color
+					"color": domainMatchings["google.com"].color,
+					"icon": domainMatchings["google.com"].icon
 				},
 				{
 					"name": "YouTube",
 					"link": "https://youtube.com",
-					"color": domainMatchings["youtube.com"].color
+					"color": domainMatchings["youtube.com"].color,
+					"icon": domainMatchings["youtube.com"].icon
 				},
 				{
 					"name": "Facebook",
 					"link": "https://facebook.com",
-					"color": domainMatchings["facebook.com"].color
+					"color": domainMatchings["facebook.com"].color,
+					"icon": domainMatchings["facebook.com"].icon
 				},
 				{
 					"name": "Twitter",
 					"link": "https://twitter.com",
-					"color": domainMatchings["twitter.com"].color
+					"color": domainMatchings["twitter.com"].color,
+					"icon": domainMatchings["twitter.com"].icon
 				},
 				{
 					"name": "Reddit",
 					"link": "https://reddit.com",
-					"color": domainMatchings["reddit.com"].color
+					"color": domainMatchings["reddit.com"].color,
+					"icon": domainMatchings["reddit.com"].icon
 				},
 				{
 					"name": "Imgur",
 					"link": "https://imgur.com",
-					"color": domainMatchings["imgur.com"].color
+					"color": domainMatchings["imgur.com"].color,
+					"icon": domainMatchings["imgur.com"].icon
 				},
 				{
 					"name": "Amazon",
 					"link": "https://amazon.com",
-					"color": domainMatchings["amazon.com"].color
+					"color": domainMatchings["amazon.com"].color,
+					"icon": domainMatchings["amazon.com"].icon
 				},
 				{
 					"name": "eBay",
 					"link": "https://ebay.com",
-					"color": domainMatchings["ebay.com"].color
+					"color": domainMatchings["ebay.com"].color,
+					"icon": domainMatchings["ebay.com"].icon
 				},
 			]
 		}
@@ -184,13 +195,24 @@ chrome.topSites.get(function(topSites) {
 			return; // no more top sites to replace with defaults
 		}
 
-		bookmark.name = topSites[index].title;
-		bookmark.link = topSites[index].url;
+		// set initial vars for bookmark, reset the other default ones
+		$.each(Object.keys(bookmark), function(_, bookmarkKey) {
+			switch (bookmarkKey) {
+				case 'name':
+					bookmark[bookmarkKey] = topSites[index].title;
+					break;
+				case 'link':
+					bookmark[bookmarkKey] = topSites[index].url;
+				default:
+					bookmark[bookmarkKey] = undefined
+			}
+		});
 
 		// try to match the color based on the domain name. otherwise, generate a random one
 		let domainMatched = domainMatchings[getDomainFromUrl(topSites[index].url).replace(/^www\./, '')];
 		if (typeof domainMatched != "undefined") {
 			bookmark.color = domainMatched.color;
+			bookmark.icon = domainMatched.icon;
 		} else {
 			let rgb = getRandomRgb();
 			bookmark.color = "rgba("+rgb[0]+","+rgb[1]+","+rgb[2]+",.7)";
@@ -523,19 +545,25 @@ function updatePrefsDisplay(key) {
 		hideBookmarkEditor();
 		// now re-add all of them
 		$.each(prefs[key], function(index, bookmark) {
-			$('.bookmarks .icons-container').append(
-				$('<a>')
-					.css('background-color', bookmark.color)
-					.addClass('icon')
-					.attr('data-color', bookmark.color)
-					.attr('href', bookmark.link)
-					.attr('title', bookmark.name)
-					.html(bookmark.name.substring(0,2))
-					.contextmenu(function() {
-						showBookmarkEditor(this);
-						return false;
-					})
-			);
+			let newBookmark = $('<a>')
+				.css('background-color', bookmark.color)
+				.addClass('icon')
+				.attr('data-color', bookmark.color)
+				.attr('data-icon', bookmark.icon)
+				.attr('href', bookmark.link)
+				.attr('title', bookmark.name)
+				.contextmenu(function() {
+					showBookmarkEditor(this);
+					return false;
+				});
+			if (typeof bookmark.icon != "undefined") {
+				newBookmark.append(
+					$('<img>').attr('src', bookmark.icon)
+				);
+			} else {
+				newBookmark.html(bookmark.name.substring(0,2))
+			}
+			$('.bookmarks .icons-container').append(newBookmark);
 		});
 		$('.bookmarks .icons-container').sortable({
 			stop: function(e, ui) {
@@ -637,6 +665,7 @@ function getBookmarkIconsAsJson() {
 			"name": bookmarkIcon.attr('title'),
 			"link": bookmarkIcon.attr('href'),
 			"color": bookmarkIcon.attr('data-color'),
+			"icon": bookmarkIcon.attr('data-icon'),
 		});
 	});
 	return bookmarkArray;
