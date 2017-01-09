@@ -296,8 +296,8 @@ input[type="checkbox"] {
 
 .bookmarks .icon {
 	border-radius: 5px;
-	width: 32px;
-	height: 32px;
+	width: 36px;
+	height: 36px;
 	border: 1px solid rgba(50,50,50,.7);
 	display: flex;
 	justify-content: center;
