@@ -121,39 +121,41 @@ var weather = {
 };
 
 // load in top sites into the default spot
-chrome.topSites.get(function(topSites) {
-	let maxTopSites = topSites.length;
-	$.each(settings.contentTypes.bookmarks.default, function(index, bookmark) {
-		if (index >= maxTopSites) {
-			return; // no more top sites to replace with defaults
-		}
+if (typeof prefs.bookmarks == "undefined") {
+	chrome.topSites.get(function(topSites) {
+		let maxTopSites = topSites.length;
+		$.each(settings.contentTypes.bookmarks.default, function(index, bookmark) {
+			if (index >= maxTopSites) {
+				return; // no more top sites to replace with defaults
+			}
 
-		// set initial vars for bookmark, reset the other default ones
-		$.each(Object.keys(bookmark), function(_, bookmarkKey) {
-			switch (bookmarkKey) {
-				case 'name':
-					bookmark[bookmarkKey] = topSites[index].title;
-					break;
-				case 'link':
-					bookmark[bookmarkKey] = topSites[index].url;
-					break;
-				default:
-					bookmark[bookmarkKey] = undefined
-					break;
+			// set initial vars for bookmark, reset the other default ones
+			$.each(Object.keys(bookmark), function(_, bookmarkKey) {
+				switch (bookmarkKey) {
+					case 'name':
+						bookmark[bookmarkKey] = topSites[index].title;
+						break;
+					case 'link':
+						bookmark[bookmarkKey] = topSites[index].url;
+						break;
+					default:
+						bookmark[bookmarkKey] = undefined
+						break;
+				}
+			});
+
+			// try to match the color based on the domain name. otherwise, generate a random one
+			let domainMatched = domainMatchings[getDomainFromUrl(topSites[index].url).replace(/^www\./, '')];
+			if (typeof domainMatched != "undefined") {
+				bookmark.color = domainMatched.color;
+				bookmark.icon = domainMatched.icon;
+			} else {
+				let rgb = getRandomRgb();
+				bookmark.color = "rgba("+rgb[0]+","+rgb[1]+","+rgb[2]+",.7)";
 			}
 		});
-
-		// try to match the color based on the domain name. otherwise, generate a random one
-		let domainMatched = domainMatchings[getDomainFromUrl(topSites[index].url).replace(/^www\./, '')];
-		if (typeof domainMatched != "undefined") {
-			bookmark.color = domainMatched.color;
-			bookmark.icon = domainMatched.icon;
-		} else {
-			let rgb = getRandomRgb();
-			bookmark.color = "rgba("+rgb[0]+","+rgb[1]+","+rgb[2]+",.7)";
-		}
 	});
-});
+}
 
 // Load in all data into prefs object
 chrome.storage.sync.get(Object.keys(settings.contentTypes), function (result) {

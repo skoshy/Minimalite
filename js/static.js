@@ -38,6 +38,8 @@ var domainMatchings = {
 	"photos.google.com": {"color": "rgba(255,255,255,.7)", "icon": "/icons/sites/googlephotos.svg"},
 	"drive.google.com": {"color": "rgba(0,0,0,.7)", "icon": "/icons/sites/googledrive.svg"},
 	"docs.google.com": {"color": "rgba(0,0,0,.7)", "icon": "/icons/sites/googledrive.svg"},
+	"slickdeals.net": {"color": "rgba(0,120,215,.7)", "icon": "/icons/sites/slickdeals.svg"},
+	"mail.google.com": {"color": "rgba(213,75,61,.7)", "icon": "/icons/sites/gmail.svg"},
 };
 
 
