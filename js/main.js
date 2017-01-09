@@ -227,6 +227,16 @@ $( document ).ready(function() {
 	$('.bookmarks_editor .bookmarks_button_cancel').click(function() {
 		hideBookmarkEditor();
 	});
+	// create the select options for the bookmarks editor
+	$.each(domainMatchings, function(dmKey, dmVal) {
+		if (typeof dmVal.icon != "undefined") {
+			$('.bookmarks_editor .bookmark_icon_picker').append(
+				$('<option>')
+					.val(dmVal.icon)
+					.html(dmVal.icon)
+			);
+		}
+	});
 	
 	// weather
 	$('.weather_currently').mouseenter(function() {
@@ -562,6 +572,7 @@ function showBookmarkEditor(el) {
 	bookmarksEditor.stop().fadeIn(200);
 	bookmarksEditor.find('.bookmark_name').val(el.attr('title'));
 	bookmarksEditor.find('.bookmark_link').val(el.attr('href'));
+	bookmarksEditor.find('.bookmark_icon').val(el.attr('data-icon'));
 	bookmarksEditor.find('.bookmark_color').val(el.css('background-color')).colorPicker({
 			positionCallback: function($elm) {
 				let $UI = this.$UI; // this is the instance; this.$UI is the colorPicker DOMElement
@@ -597,6 +608,7 @@ function saveBookmarks() {
 	el.attr('title', bookmarksEditor.find('.bookmark_name').val());
 	el.attr('href', bookmarksEditor.find('.bookmark_link').val());
 	el.attr('data-color', bookmarksEditor.find('.bookmark_color').val());
+	el.attr('data-icon', bookmarksEditor.find('.bookmark_icon').val());
 
 	let bookmarksJson = getBookmarkIconsAsJson();
 	saveSetting(bookmarksJson, 'bookmarks', true);

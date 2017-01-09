@@ -210,7 +210,7 @@ button {
 	border: 1px solid white;
 }
 
-input[type="text"] {
+input[type="text"]:not(.normal_input) {
 	background: transparent;
 	color: white;
 	border: 0;
@@ -340,6 +340,10 @@ input[type="checkbox"] {
 	padding: 8px;
 	background-color: rgba(0,0,0,.7);
 	border-radius: 10px;
+}
+
+.bookmarks_editor select {
+	width: 100%;
 }
 
 .bookmarks_editor .buttons_container {
