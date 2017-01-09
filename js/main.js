@@ -15,6 +15,21 @@ var domainMatchings = {
 	"stackoverflow.com": {"color": "rgba(244,128,36,.7)"},
 	"yahoo.com": {"color": "rgba(64,0,144,.7)"},
 	"en.wikipedia.org": {"color": "rgba(207,208,210,.7)"},
+	"netflix.com": {"color": "rgba(229,9,20,.7)"},
+	"hulu.com": {"color": "rgba(102,170,51,.7)"},
+	"soundcloud.com": {"color": "rgba(255,85,0,.7)"},
+	"play.spotify.com": {"color": "rgba(132,189,0,.7)"},
+	"cnn.com": {"color": "rgba(204,0,0,.7)"},
+	"nytimes.com": {"color": "rgba(26,26,26,.7)"},
+	"baidu.com": {"color": "rgba(33,41,214,.7)"},
+	"qq.com": {"color": "rgba(59,148,214,.7)"},
+	"duolingo.com": {"color": "rgba(126,181,48,.7)"},
+	"vk.com": {"color": "rgba(80,114,153,.7)"},
+	"linkedin.com": {"color": "rgba(0,119,181,.7)"},
+	"tumblr.com": {"color": "rgba(54,70,93,.7)"},
+	"pinterest.com": {"color": "rgba(181,0,18,.7)"},
+	"espn.com": {"color": "rgba(221,0,0,.7)"},
+	"craigslist.org": {"color": "rgba(85,26,139,.7)"},
 };
 
 // Get settings
@@ -714,8 +729,9 @@ function updateWeatherDisplay() {
 			return (css.match(/(^|\s)wi-owm-\S+/g) || []).join(' ');
 		}).addClass('wi-owm-'+weather.condition_code);
 		$('.weather_location').html(weather.weather_location);
-		$('.weather_forecast iframe').attr('src', '');
-		$('.weather_forecast iframe').attr('src', 'https://forecast.io/embed/#name=this%20week&lat='+weather.lat+'&lon='+weather.lon);
+
+		let forecastUrl = 'https://forecast.io/embed/?'+Math.round(Math.random()*100000)+'#name=this%20week&lat='+weather.lat+'&lon='+weather.lon; // generate a random number to allow refreshing
+		$('.weather_forecast iframe').attr('src', forecastUrl);
 	}
 }
 
