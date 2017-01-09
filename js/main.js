@@ -630,32 +630,6 @@ function prepTemperature(fahr) {
 	}
 }
 
-function convertLinebreaksToBrs(text) {
-	return text.replace(/(?:\r\n|\r|\n)/g, "<br>");
-}
-
-function convertBrsToLinebreaks(text) {
-	return text.replace(/<\s*br.*?>/g, "\n");
-}
-
-function htmlEncode(value){
-	//create a in-memory div, set it's inner text(which jQuery automatically encodes)
-	//then grab the encoded contents back out.  The div never exists on the page.
-	let newlineDelim = '%%%%%html_decode_newline%%%%%';
-	let pattern = new RegExp(newlineDelim, 'g');
-	return $('<div/>').text(
-		value.replace(/(?:\r\n|\r|\n)/g, newlineDelim)
-	).html().replace(pattern, "\n");
-}
-
-function htmlDecode(value) {
-	let newlineDelim = '%%%%%html_decode_newline%%%%%';
-	let pattern = new RegExp(newlineDelim, 'g');
-	return $('<div/>').html(
-		value.replace(/(?:\r\n|\r|\n)/g, newlineDelim)
-	).text().replace(pattern, "\n");
-}
-
 function getAndUpdateWeather(location, isUsingWeatherId) {
 	console.log("Getting weather...");
 
@@ -712,18 +686,6 @@ function updateWeatherDisplay() {
 		let forecastUrl = 'https://forecast.io/embed/?'+Math.round(Math.random()*100000)+'#name=this%20week&lat='+weather.lat+'&lon='+weather.lon; // generate a random number to allow refreshing
 		$('.weather_forecast iframe').attr('src', forecastUrl);
 	}
-}
-
-function getDomainFromUrl(url) {
-	return url.split('/')[url.indexOf('//') < 0 ? 0 : 2].split(/[\/?:#&]/)[0]
-};
-
-function getRandomRgb() {
-	let toReturn = [];
-	for (let i = 0; i < 3; i++) {
-		toReturn.push(Math.floor(Math.random() * 256));
-	}
-	return toReturn;
 }
 
 function getSelectionText() {
