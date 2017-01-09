@@ -206,6 +206,7 @@ chrome.topSites.get(function(topSites) {
 					break;
 				default:
 					bookmark[bookmarkKey] = undefined
+					break;
 			}
 		});
 
