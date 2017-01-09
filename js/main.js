@@ -203,6 +203,7 @@ chrome.topSites.get(function(topSites) {
 					break;
 				case 'link':
 					bookmark[bookmarkKey] = topSites[index].url;
+					break;
 				default:
 					bookmark[bookmarkKey] = undefined
 			}
