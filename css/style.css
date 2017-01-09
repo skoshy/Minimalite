@@ -354,7 +354,12 @@ svg-icon svg {
 }
 
 svg-icon svg * {
-	fill: white;
+	fill: rgba(255,255,255,.7);
+	transition: all .2s linear;
+}
+
+svg-icon svg:hover * {
+	fill: rgba(255,255,255,1);
 }
 
 [contentEditable] {
