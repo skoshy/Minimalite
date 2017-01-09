@@ -228,15 +228,32 @@ $( document ).ready(function() {
 		hideBookmarkEditor();
 	});
 	// create the select options for the bookmarks editor
-	$.each(domainMatchings, function(dmKey, dmVal) {
-		if (typeof dmVal.icon != "undefined") {
-			$('.bookmarks_editor .bookmark_icon_picker').append(
-				$('<option>')
-					.val(dmVal.icon)
-					.html(dmVal.icon)
-			);
-		}
-	});
+	(function() {
+		let iconList = [];
+		$.each(domainMatchings, function(dmKey, dmVal) {
+			if (typeof dmVal.icon != "undefined") {
+				if (typeof iconList[dmVal.icon] == "undefined") { // only include the icon once
+					iconList[dmVal.icon] = true;
+					$('.bookmarks_editor .bookmark_icon_picker').append(
+						$('<option>')
+							.val(dmVal.icon)
+							.html(dmVal.icon)
+					);
+				}
+			}
+		});
+		$('.bookmarks_editor .bookmark_icon').focusin(function() {
+			let el = $(this);
+			el.attr('data-original-val', el.val());
+			el.val('');
+		});
+		$('.bookmarks_editor .bookmark_icon').focusout(function() {
+			let el = $(this);
+			if ($.trim(el.val()) == '') {
+				el.val(el.attr('data-original-val'));
+			}
+		});
+	})();
 	
 	// weather
 	$('.weather_currently').mouseenter(function() {
