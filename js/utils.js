@@ -110,6 +110,11 @@ function getDomainFromUrl(url) {
 	return url.split('/')[url.indexOf('//') < 0 ? 0 : 2].split(/[\/?:#&]/)[0]
 };
 
+function getFilenameFromUrl(url) {
+	let myRegexp = /.*\/(.*)\./g;
+	return myRegexp.exec(url)[1];
+};
+
 function getRandomRgb() {
 	let toReturn = [];
 	for (let i = 0; i < 3; i++) {

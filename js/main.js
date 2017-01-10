@@ -1,7 +1,13 @@
 "use strict";
 
 // Get settings
+var scriptVersion;
+$.getJSON( "manifest.json", function( data ) {
+	scriptVersion = data.version;
+});
+
 var prefs = {};
+var prefsLocal = {};
 var settings = {
 	"contentTypes": {
 		"name": {
@@ -24,7 +30,7 @@ var settings = {
 			"autoSelect": true,
 		},
 		"custom_image": {
-			"default": "https://source.unsplash.com/category/nature/1280x720/daily",
+			"default": "https://source.unsplash.com/collection/486870/1280x720/daily",
 			"class": "custom_image_field",
 			"allowNewlines": false,
 			"autoSelect": true,
@@ -237,7 +243,7 @@ $( document ).ready(function() {
 					$('.bookmarks_editor .bookmark_icon_picker').append(
 						$('<option>')
 							.val(dmVal.icon)
-							.html(dmVal.icon)
+							.html(getFilenameFromUrl(dmVal.icon))
 					);
 				}
 			}
@@ -329,6 +335,7 @@ $( document ).ready(function() {
 	$('[data-content-type]:not([type="checkbox"])').on('drop paste', function(e) {
 		let el = $(e.target);
 		let originalText = getOrEditText(el, undefined, true);
+		let contentType = el.attr('data-content-type');
 
 		// cancel paste
 		e.originalEvent.preventDefault();
@@ -622,10 +629,12 @@ function saveBookmarks() {
 	let bookmarksEditor = $('.bookmarks_editor');
 	let el = $('.bookmarks .icon.being_edited');
 
-	el.attr('title', bookmarksEditor.find('.bookmark_name').val());
-	el.attr('href', bookmarksEditor.find('.bookmark_link').val());
-	el.attr('data-color', bookmarksEditor.find('.bookmark_color').val());
-	el.attr('data-icon', bookmarksEditor.find('.bookmark_icon').val());
+	if (el.length != 0) {
+		el.attr('title', bookmarksEditor.find('.bookmark_name').val());
+		el.attr('href', bookmarksEditor.find('.bookmark_link').val());
+		el.attr('data-color', bookmarksEditor.find('.bookmark_color').val());
+		el.attr('data-icon', bookmarksEditor.find('.bookmark_icon').val());
+	}
 
 	let bookmarksJson = getBookmarkIconsAsJson();
 	saveSetting(bookmarksJson, 'bookmarks', true);
