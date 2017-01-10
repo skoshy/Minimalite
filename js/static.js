@@ -44,6 +44,9 @@ var domainMatchings = {
 	"slickdeals.net": {"color": "rgba(0,120,215,.7)", "icon": "/icons/sites/Slickdeals.svg"},
 	"mail.google.com": {"color": "rgba(213,75,61,.7)", "icon": "/icons/sites/Gmail.svg"},
 	"perksatwork.com": {"color": "rgba(241,95,34,.7)", "icon": "/icons/sites/PerksAtWork.svg"},
+	"dawn.com": {"color": "rgba(255,255,255,.7)", "icon": "/icons/sites/Dawn.svg"},
+	"trello.com": {"color": "rgba(0,145,228,.7)", "icon": "/icons/sites/Trello.svg"},
+	"slack.com": {"color": "rgba(227,36,116,.7)", "icon": "/icons/sites/Slack.svg"},
 };
 
 

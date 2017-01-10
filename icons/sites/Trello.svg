@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="200"
+   height="200"
+   viewBox="0 0 200 200"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="trello.svg">
+  <metadata
+     id="metadata26">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>trello-logo-white</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs24" />
+  <sodipodi:namedview
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="701"
+     inkscape:window-height="480"
+     id="namedview22"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.33446328"
+     inkscape:cx="392.5"
+     inkscape:cy="97.010135"
+     inkscape:window-x="3404"
+     inkscape:window-y="1379"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <title
+     id="title4">trello-logo-white</title>
+  <desc
+     id="desc6">Created with Sketch.</desc>
+  <path
+     style="fill:#fff;fill-rule:evenodd"
+     inkscape:connector-curvature="0"
+     id="path20"
+     d="M 25,0 C 11.193,0 0,11.2 0,25 l 0,150 c 0,13.806 11.2,25 25,25 l 150,0 c 13.806,0 25,-11.2 25,-25 L 200,25 C 200,11.193 188.8,0 175,0 L 25,0 Z m 99.997,26 C 118.37,26 113,31.372 113,38.006 l 0,63.988 c 0,6.63 5.373,12.006 11.997,12.006 l 37.006,0 C 168.629,114 174,108.628 174,101.994 l 0,-63.988 C 174,31.376 168.627,26 162.003,26 l -37.006,0 z m -87,0 C 31.37,26 26,31.367 26,38.005 l 0,113.99 C 26,158.625 31.373,164 37.997,164 l 37.006,0 C 81.629,164 87,158.633 87,151.995 L 87,38.005 C 87,31.375 81.627,26 75.003,26 l -37.006,0 z" />
+</svg>
