@@ -716,6 +716,13 @@ function updateWeatherDisplay() {
 		let high = prepTemperature(weather.high);
 		let low = prepTemperature(weather.low);
 
+		let fioUnits;
+		if (prefs.celsius) {
+			fioUnits = 'ca';
+		} else {
+			fioUnits = 'us';
+		}
+
 		$('.weather .weather_high').html(high+"&deg;");
 		$('.weather .weather_low').html(low+"&deg;");
 		$('.weather .weather_icon').removeClass(function(index, css) {
@@ -723,7 +730,7 @@ function updateWeatherDisplay() {
 		}).addClass('wi-owm-'+weather.condition_code);
 		$('.weather_location').html(weather.weather_location);
 
-		let forecastUrl = 'https://forecast.io/embed/?'+Math.round(Math.random()*100000)+'#name=this%20week&lat='+weather.lat+'&lon='+weather.lon; // generate a random number to allow refreshing
+		let forecastUrl = 'https://forecast.io/embed/?'+Math.round(Math.random()*100000)+'#name=this%20week&units='+fioUnits+'&lat='+weather.lat+'&lon='+weather.lon; // generate a random number to allow refreshing
 		$('.weather_forecast iframe').attr('src', forecastUrl);
 	}
 }
