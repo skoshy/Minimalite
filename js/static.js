@@ -46,7 +46,8 @@ var domainMatchings = {
 	"perksatwork.com": {"color": "rgba(241,95,34,.7)", "icon": "/icons/sites/PerksAtWork.svg"},
 	"dawn.com": {"color": "rgba(255,255,255,.7)", "icon": "/icons/sites/Dawn.svg"},
 	"trello.com": {"color": "rgba(0,145,228,.7)", "icon": "/icons/sites/Trello.svg"},
-	"slack.com": {"color": "rgba(227,36,116,.7)", "icon": "/icons/sites/Slack.svg"},
+	"bbc.co.uk": {"color": "rgba(193,0,1,.7)", "icon": "/icons/sites/BBC.svg"},
+	"bbc.com": {"color": "rgba(193,0,1,.7)", "icon": "/icons/sites/BBC.svg"},
 };
 
 
