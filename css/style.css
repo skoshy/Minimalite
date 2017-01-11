@@ -4,6 +4,7 @@ body, input, button {
 	font-family: 'Roboto', sans-serif;
 	overflow: hidden;
 	font-size: 14px;
+	background: black;
 }
 
 strong {

@@ -203,22 +203,25 @@ chrome.storage.local.get(Object.keys(weather), function (data) {
 	$( document ).ready(function() {updateWeatherDisplay();});
 });
 
-$( document ).ready(function() {
-	let interval = setInterval(function() {
-		let momentNow = moment();
-		$('.time').html(momentNow.format('h:mm'));
+function setTime() {
+	let momentNow = moment();
+	$('.time').html(momentNow.format('h:mm'));
 
-		let hour = momentNow.hours();
-		let newWelcomeText;
-		if (hour <= 3 || hour >= 18) {
-			newWelcomeText = 'Good evening, ';
-		} else if (hour >= 4 && hour <= 11) {
-			newWelcomeText = 'Good morning, ';
-		} else {
-			newWelcomeText = 'Good afternoon, ';
-		}
-		$('.welcome_text').html(newWelcomeText);
-	}, 100);
+	let hour = momentNow.hours();
+	let newWelcomeText;
+	if (hour <= 3 || hour >= 18) {
+		newWelcomeText = 'Good evening, ';
+	} else if (hour >= 4 && hour <= 11) {
+		newWelcomeText = 'Good morning, ';
+	} else {
+		newWelcomeText = 'Good afternoon, ';
+	}
+	$('.welcome_text').html(newWelcomeText);
+}
+
+$( document ).ready(function() {
+	setTime();
+	let interval = setInterval(setTime, 100);
 
 	// add in all wallpaper thumbs
 	addWallpaperThumbs();
