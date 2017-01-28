@@ -221,6 +221,8 @@ function setTime() {
 
 $( document ).ready(function() {
 	setTime();
+	$("img").unveil(); // initiate unveil plugin
+
 	let interval = setInterval(setTime, 100);
 
 	// add in all wallpaper thumbs
@@ -274,9 +276,9 @@ $( document ).ready(function() {
 	
 
 	// fade in
-	$('.centered_box').fadeIn();
+	$('.centered_box').fadeIn(200);
 	$('.wallpaper img').on("load", function(e) {
-		$(this).parent().fadeIn(300);
+		$(this).parent().fadeIn(100);
 	});
 
 	$('.reset_wallpaper_button').click(function() {
@@ -290,6 +292,7 @@ $( document ).ready(function() {
 	});
 
 	$('.prefs_button').click(function() {
+		$('.wallpaper_thumbs img').trigger('unveil');
 		$('.prefs_panel').stop().fadeToggle(200);
 	});
 
@@ -380,7 +383,7 @@ function addWallpaperThumbs() {
 	$.each(wallpapers, function(index, wallpaper) {
 		$('.wallpaper_thumbs').append(
 			$('<img>')
-				.attr('src', wallpaper.image+"/84x65")
+				.attr('data-src', wallpaper.image+"/84x65")
 				.attr('value', wallpaper.image+"/1280x720")
 				.attr('data-content-type', 'custom_image')
 				.click(function() {
@@ -388,6 +391,7 @@ function addWallpaperThumbs() {
 				})
 		);
 	});
+	$(".wallpaper_thumbs img").unveil(); // initiate unveil for dynamicly generated thumbs
 }
 
 /*
