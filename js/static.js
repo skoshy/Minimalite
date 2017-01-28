@@ -43,6 +43,7 @@ var domainMatchings = {
 	"docs.google.com": {"color": "rgba(0,0,0,.7)", "icon": "/icons/sites/Google Drive.svg"},
 	"slickdeals.net": {"color": "rgba(0,120,215,.7)", "icon": "/icons/sites/Slickdeals.svg"},
 	"mail.google.com": {"color": "rgba(213,75,61,.7)", "icon": "/icons/sites/Gmail.svg"},
+	"inbox.google.com": {"color": "rgba(66,133,244,.7)", "icon": "/icons/sites/Google Inbox.svg"},
 	"perksatwork.com": {"color": "rgba(241,95,34,.7)", "icon": "/icons/sites/PerksAtWork.svg"},
 	"dawn.com": {"color": "rgba(255,255,255,.7)", "icon": "/icons/sites/Dawn.svg"},
 	"trello.com": {"color": "rgba(0,145,228,.7)", "icon": "/icons/sites/Trello.svg"},
