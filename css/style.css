@@ -18,348 +18,350 @@ button {
 }
 
 strong {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 h1 {
-	font-size: 20px;
-	margin-bottom: 15px;
-	font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
 }
 
 p {
-	line-height: 1.2;
+  line-height: 1.2;
 }
 
 .wallpaper {
-	/* background-color: black; */
-	background-size: cover;
-	background-position: center;
+  /* background-color: black; */
+  background-size: cover;
+  background-position: center;
 
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
-	z-index: -100;
+  z-index: -100;
 }
 
 .wallpaper.blurred {
-	filter: blur(3px);
-	box-sizing: content-box;
-	padding: 6px;
-	top: -6px;
-	left: -6px;
+  filter: blur(3px);
+  box-sizing: content-box;
+  padding: 6px;
+  top: -6px;
+  left: -6px;
 }
 
 .wallpaper.dimmed {
-	filter: brightness(.75);
+  filter: brightness(0.75);
 }
 
 .wallpaper.blurred.dimmed {
-	filter: blur(3px) brightness(.75);
+  filter: blur(3px) brightness(0.75);
 }
 
 .wallpaper img {
-	width: 100%;
-	height: 100%;
-	opacity: .01;
+  width: 100%;
+  height: 100%;
+  opacity: 0.01;
 }
 
 .centered_box {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-;	height: 100%;
-	width: 100%;
-	position: absolute;
-	text-align: center;
-	text-shadow: 0px 0px 10px #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  text-shadow: 0px 0px 10px #000;
 }
 
 .time {
-	font-size: 180px;
+  font-size: 180px;
 }
 
 .welcome_box {
-	font-size: 45px;
+  font-size: 45px;
 }
 
 .notes {
-	max-width: 200px;
-	max-height: 200px;
-	overflow-y: auto;
-	overflow-x: hidden;
+  max-width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .weather .loader {
-	font-size: 2px;
-	margin-right: 8px;
+  font-size: 2px;
+  margin-right: 8px;
 }
 
 .weather .weather_top {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .weather .weather_icon {
-	filter: drop-shadow( 0px 0px 2px rgba(0,0,0,.7) );
-	font-size: 30px;
-	padding-right: 10px;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.7));
+  font-size: 30px;
+  padding-right: 10px;
 }
 
 .weather .weather_icon,
 .weather .weather_high,
 .weather .weather_low {
-	display: inline-block;
+  display: inline-block;
 }
 
 .weather .weather_high {
-	font-size: 24px;
-	padding-right: 5px;
+  font-size: 24px;
+  padding-right: 5px;
 }
 
 .weather .weather_low {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 .weather .weather_location_container {
-	margin-top: 2px;
+  margin-top: 2px;
 }
 
 .weather_currently {
-	padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .weather_forecast_container {
-	position: relative;
+  position: relative;
 }
 
 .weather_forecast {
-	position: absolute;
-	width: 500px;
-	height: 250px;
-	right: 0;
-	top: 0;
-	box-sizing: content-box;
-	top: 0;
-	background-color: rgba(0,0,0,.8);
-	padding: 8px;
-	border-radius: 20px;
+  position: absolute;
+  width: 500px;
+  height: 250px;
+  right: 0;
+  top: 0;
+  box-sizing: content-box;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 8px;
+  border-radius: 20px;
 }
 
 .weather_forecast iframe {
-	filter: invert(1);
-	width: 100%;
-	height: 100%;
+  filter: invert(1);
+  width: 100%;
+  height: 100%;
 }
 
 .prefs_panel {
-	background: rgba(0,0,0,.7);
-	border-radius: 10px 10px 0 10px;
-	width: 360px;
-	height: 200px;
-	padding: 14px;
-	margin-bottom: 25px;
-	position: relative;
-	text-align: left;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px 10px 0 10px;
+  width: 360px;
+  height: 200px;
+  padding: 14px;
+  margin-bottom: 25px;
+  position: relative;
+  text-align: left;
 }
 
 .prefs_panel_inner {
-	overflow-y: scroll;
-	height: 100%;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .prefs_panel .triangle {
-	position: absolute;
-	bottom: -15px;
-	right: 0;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 15px 15px 0 15px;
-	border-color: rgba(0,0,0,.7) transparent transparent transparent;
+  position: absolute;
+  bottom: -15px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 15px 0 15px;
+  border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
 }
 
 .prefs_panel h1 {
-	float: left;
+  float: left;
 }
 
 .prefs_panel p {
-	margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .prefs_panel a,
 .prefs_panel a:visited,
 .prefs_panel a:active,
 .prefs_panel a:hover {
-	color: #A3DEFE;
+  color: #a3defe;
 }
 
 .prefs_panel .section {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .prefs_panel .reset_wallpaper_container {
-	float: right;
-	text-align: center;
+  float: right;
+  text-align: center;
 }
 
 .prefs_panel .wallpaper_thumbs {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .prefs_panel .wallpaper_thumbs img {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 button {
-	background: transparent;
-	color: white;
-	border: 1px solid white;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
 }
 
 input[type="text"]:not(.normal_input) {
-	background: transparent;
-	color: white;
-	border: 0;
-	padding: 0;
-	width: 100%;
+  background: transparent;
+  color: white;
+  border: 0;
+  padding: 0;
+  width: 100%;
 }
 
 input[type="checkbox"] {
-	margin: 0;
+  margin: 0;
 }
 
 .prefs_row_container {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .prefs_row {
-	display: flex;
-	margin-bottom: 8px;
+  display: flex;
+  margin-bottom: 8px;
 }
 
 .prefs_row .label {
-	font-weight: bold;
-	flex: 1 1 0;
+  font-weight: bold;
+  flex: 1 1 0;
 }
 
 .prefs_row .field {
-	flex: 2 1 0;
+  flex: 2 1 0;
 }
 
-.prefs_row .label, .prefs_row .field {
-	overflow: hidden;
+.prefs_row .label,
+.prefs_row .field {
+  overflow: hidden;
 }
 
 .prefs_button {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .widget_outer {
-	position: absolute;
-	transition: opacity 200ms linear;
+  position: absolute;
+  transition: opacity 200ms linear;
 }
 
 .widget_outer.dimmed {
-	opacity: .3;
+  opacity: 0.3;
 }
 
 .widget_outer.dimmed:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 .widget_outer.bottom_left {
-	padding: 150px 150px 20px 20px;
-	bottom: 0;
-	left: 0;
-	text-align: left;
+  padding: 150px 150px 20px 20px;
+  bottom: 0;
+  left: 0;
+  text-align: left;
 }
 
 .widget_outer.bottom_right {
-	padding: 150px 20px 20px 150px;
-	bottom: 0;
-	right: 0;
-	text-align: right;
+  padding: 150px 20px 20px 150px;
+  bottom: 0;
+  right: 0;
+  text-align: right;
 }
 
 .widget_outer.top_left {
-	padding: 20px 150px 150px 20px;
-	top: 0;
-	left: 0;
-	text-align: left;
+  padding: 20px 150px 150px 20px;
+  top: 0;
+  left: 0;
+  text-align: left;
 }
 
 .widget_outer.top_right {
-	padding: 20px 20px 150px 150px;
-	top: 0;
-	right: 0;
-	text-align: right;
+  padding: 20px 20px 150px 150px;
+  top: 0;
+  right: 0;
+  text-align: right;
 }
 
 .bookmarks {
-	width:  200px;
-	position: relative;
+  width: 200px;
+  position: relative;
 }
 
 .bookmarks .icon {
-	border-radius: 5px;
-	width: 36px;
-	height: 36px;
-	border: 1px solid rgba(50,50,50,.7);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: rgba(255,255,255,.7);
-	font-size: 16px;
-	box-shadow: 0px 0px 5px rgba(0,0,0,.7);
-	cursor: pointer;
-	transition: box-shadow 0.2s ease-in-out;
-	color: white;
-	text-decoration: none;
-	float: left;
-	margin-right: 10px;
-	margin-bottom: 10px;
+  border-radius: 5px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(50, 50, 50, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+  color: white;
+  text-decoration: none;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .bookmarks .icon:focus {
-	box-shadow: 0 0 20px rgba(0, 167, 255, 0.9);
-	border-color: rgba(0, 167, 255, 0.9);
+  box-shadow: 0 0 20px rgba(0, 167, 255, 0.9);
+  border-color: rgba(0, 167, 255, 0.9);
 }
 
-.bookmarks .icon:hover, .bookmarks .icon.being_edited {
-	border: 1px solid rgba(255,255,255,.3);
-	box-shadow: 0 0 5px rgba(255, 255, 255, .3);
+.bookmarks .icon:hover,
+.bookmarks .icon.being_edited {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 .bookmarks .icon img {
-	max-width: 100%;
-	min-width: 0%;
-	max-height: 100%;
-	padding: 5px;
-	box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0%;
+  max-height: 100%;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .bookmarks_editor {
-	position: absolute;
-	right: 0;
-	width: 300px;
-	margin-right: -300px;
-	display: none;
-	padding: 8px;
-	background-color: rgba(0,0,0,.7);
-	border-radius: 10px;
+  position: absolute;
+  right: 0;
+  width: 300px;
+  margin-right: -300px;
+  display: none;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
 }
 
 .bookmarks_editor select {
-	width: 100%;
+  width: 100%;
 }
 
 .bookmarks_editor .buttons_container {
-	margin-top: 8px;
+  margin-top: 8px;
 }
 
 /*
@@ -369,23 +371,23 @@ input[type="checkbox"] {
 */
 
 svg-icon svg {
-	width: 32px;
-	height: 32px;
-	filter: drop-shadow( 0px 0px 2px rgba(0,0,0,.7) );
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.7));
 }
 
 svg-icon svg * {
-	fill: rgba(255,255,255,.7);
-	transition: all .2s linear;
+  fill: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s linear;
 }
 
 svg-icon svg:hover * {
-	fill: rgba(255,255,255,1);
+  fill: rgba(255, 255, 255, 1);
 }
 
 [contentEditable] {
-	display: inline-block;
-	/*
+  display: inline-block;
+  /*
 		This is needed to allow easy line breaks in the input. It leads to a bug though. See these two links for details:
 		1) http://stackoverflow.com/a/20533364/506913
 		2) http://stackoverflow.com/a/34445203/506913
@@ -394,106 +396,101 @@ svg-icon svg:hover * {
 
 [contentEditable]::-webkit-scrollbar-track,
 [contentEditable]::-webkit-scrollbar-thumb,
-[contentEditable]::-webkit-scrollbar
-{
-	visibility: hidden;
+[contentEditable]::-webkit-scrollbar {
+  visibility: hidden;
 }
 
 [contentEditable]:hover::-webkit-scrollbar-track,
 [contentEditable]:hover::-webkit-scrollbar-thumb,
-[contentEditable]:hover::-webkit-scrollbar
-{
-	visibility: visible;
+[contentEditable]:hover::-webkit-scrollbar {
+  visibility: visible;
 }
 
 .selectable {
-	cursor: pointer;
-	transition: background-color 200ms linear;
+  cursor: pointer;
+  transition: background-color 200ms linear;
 }
 
 .selectable:hover {
-	background-color: rgba(255,255,255,.4) !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 .clear {
-	clear: both;
+  clear: both;
 }
 
-::-webkit-scrollbar-track
-{
-	background-color: rgba(100,100,100,.01);
+::-webkit-scrollbar-track {
+  background-color: rgba(100, 100, 100, 0.01);
 }
 
-::-webkit-scrollbar
-{
-	width: 10px;
-	border: 1px solid rgba(0,0,0,.2);
-	background-color: rgba(255,255,255,.1);
+::-webkit-scrollbar {
+  width: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: rgba(0,0,0,.4);
-	border: 1px solid rgba(80,80,80,.7);
-	border-radius: 10px;
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(80, 80, 80, 0.7);
+  border-radius: 10px;
 }
 
 .loader,
 .loader:before,
 .loader:after {
-	background: #ffffff;
-	-webkit-animation: load1 1s infinite ease-in-out;
-	animation: load1 1s infinite ease-in-out;
-	width: 1em;
-	height: 4em;
+  background: #ffffff;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
 }
 .loader {
-	display: inline-block;
-	font-size: 4px;
-	color: #ffffff;
-	text-indent: -9999em;
-	position: relative;
-	-webkit-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	transform: translateZ(0);
-	-webkit-animation-delay: -0.16s;
-	animation-delay: -0.16s;
+  display: inline-block;
+  font-size: 4px;
+  color: #ffffff;
+  text-indent: -9999em;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
 }
 .loader:before,
 .loader:after {
-	position: absolute;
-	top: 0;
-	content: '';
+  position: absolute;
+  top: 0;
+  content: "";
 }
 .loader:before {
-	left: -1.5em;
-	-webkit-animation-delay: -0.32s;
-	animation-delay: -0.32s;
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
 }
 .loader:after {
-	left: 1.5em;
+  left: 1.5em;
 }
 @-webkit-keyframes load1 {
-0%,
-80%,
-100% {
-box-shadow: 0 0;
-height: 4em;
-}
-40% {
-box-shadow: 0 -2em;
-height: 5em;
-}
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
 }
 @keyframes load1 {
-0%,
-80%,
-100% {
-box-shadow: 0 0;
-height: 4em;
-}
-40% {
-box-shadow: 0 -2em;
-height: 5em;
-}
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
 }
