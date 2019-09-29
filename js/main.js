@@ -276,9 +276,9 @@ $( document ).ready(function() {
 	
 
 	// fade in
-	$('.centered_box').fadeIn(200);
+	$('.centered_box').fadeIn(500);
 	$('.wallpaper img').on("load", function(e) {
-		$(this).parent().fadeIn(100);
+		$(this).parent().fadeIn(500);
 	});
 
 	$('.reset_wallpaper_button').click(function() {
